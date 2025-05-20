@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@/assets/css/base.css',
   ],
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
   ],
 })

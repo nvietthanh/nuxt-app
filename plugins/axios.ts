@@ -1,11 +1,12 @@
 // plugins/axios.ts
 import axios, { type AxiosRequestConfig } from 'axios'
 import Cookies from 'js-cookie'
+import { useErrorsStore } from '@/stores/errors'
 
 const baseApiURL = import.meta.env.VITE_BASE_API_URL.replace(/\/$/, '')
 
 export const defaultConfig: AxiosRequestConfig = {
-    baseURL: baseApiURL + '/api',
+    baseURL: baseApiURL,
     timeout: 60000,
     headers: { 'X-Requested-With': 'XMLHttpRequest' },
     withCredentials: false,
@@ -66,8 +67,8 @@ export default defineNuxtPlugin((nuxtApp) => {
 
             // Validation error
             if (status === 422 || status === 302) {
-                // const errorStore = useErrorStore() // pinia
-                // errorStore.set(error.response.data?.error?.message)
+                const errorStore = useErrorsStore()
+                errorStore.set(error.response.data?.errors)
             }
 
             return Promise.reject(
