@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { FormRules } from "element-plus";
-import type { LoginForm } from "@/types/forms/auth/LoginForm";
+import type { LoginForm } from "@/types/forms/auth/login";
 import { validationMessages } from "@/utils/validation";
 import useForm from "@/composables/useForm";
 
@@ -44,7 +44,7 @@ const rules = reactive<FormRules<LoginForm>>({
 const handleLogin = async () => {
   $errors.clear();
 
-  await $axios.post("/api/v1/login", formData.value);
+  await $axios.post("/v1/login", formData.value);
 };
 </script>
 
