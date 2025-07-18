@@ -1,16 +1,16 @@
 // types/axios.d.ts
-import type { AxiosInstance } from 'axios'
+import type { AxiosInstance } from "axios";
 
-declare module '#app' {
+declare module "#app" {
   interface NuxtApp {
-    $axios: AxiosInstance
+    $axios: AxiosInstance;
   }
 }
 
-declare module 'nuxt/app' {
+declare module "nuxt/app" {
   interface NuxtApp {
-    $axios: AxiosInstance
+    $axios: AxiosInstance;
   }
 }
 
-export {}
+export {};

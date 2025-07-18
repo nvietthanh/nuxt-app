@@ -44,7 +44,7 @@ const rules = reactive<FormRules<LoginForm>>({
 const handleLogin = async () => {
   $errors.clear();
 
-  await $axios.post("/api/v1/login", formData.value);
+  await $axios.post("/v1/login", formData.value);
 };
 </script>
 
