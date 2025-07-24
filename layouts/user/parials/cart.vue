@@ -24,20 +24,22 @@
               v-for="product in cartProducts"
               class="px-[18px] py-[12px] flex"
             >
-              <a href="route('product', 1)">
-                <img
-                  :src="product.image"
-                  alt=""
-                  class="w-[50px] h-[50px] border-[1px]"
+              <NuxtLink :to="{ name: 'product', params: { id: product.id } }">
+                <ImageLoading
+                  :src="product.images[0].thumbnal_url ?? ''"
+                  :alt="product.name"
+                  class="w-[50px] aspect-square border-[1px]"
                 />
-              </a>
+              </NuxtLink>
               <div class="ml-[12px] flex-1">
                 <div class="flex justify-between">
-                  <a href="route('product', 1)">
+                  <NuxtLink
+                    :to="{ name: 'product', params: { id: product.id } }"
+                  >
                     <div class="hidden-two-line">
                       {{ product.name }}
                     </div>
-                  </a>
+                  </NuxtLink>
                   <div class="ml-[18px] text-[14px]">
                     <div class="text-[#d0021c]">
                       {{
@@ -47,18 +49,20 @@
                         )
                       }}
                     </div>
-                    <div class="mt-[2px]">x{{ product?.quantity }}</div>
+                    <div class="mt-[2px]">
+                      x{{ product?.purchase_quantity }}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="flex justify-end">
-              <a
-                href="route('cart')"
+              <NuxtLink
+                :to="{ name: 'cart' }"
                 class="button mb-[4px] mt-[8px] mr-[32px] w-[120px] text-center h-[38px] leading-[38px] border-[1px] text-[white] bg-[#d0011b]"
               >
                 Xem giỏ hàng
-              </a>
+              </NuxtLink>
             </div>
           </template>
         </div>
@@ -68,9 +72,10 @@
 </template>
 <script setup lang="ts">
 import { formatPrice } from "@/libs/formatter";
-import type { Cart } from "@/types/users/cart";
+import type { ProductCart } from "@/types/users/cart";
+import ImageLoading from "~/components/common/image-loading.vue";
 
-withDefaults(defineProps<{ cartProducts?: Cart[] }>(), {
+withDefaults(defineProps<{ cartProducts?: ProductCart[] }>(), {
   cartProducts: () => [],
 });
 

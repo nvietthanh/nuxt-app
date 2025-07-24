@@ -37,7 +37,7 @@
           <div class="bg-[#000] w-[1px] mx-[12px]">&ensp;</div>
           <div>4.4k đánh giá</div>
           <div class="bg-[#000] w-[1px] mx-[12px]">&ensp;</div>
-          <div>{{ formatValue(product.sold) }} lượt bán</div>
+          <div>{{ formatCompactNumber(product.sold) }} lượt bán</div>
         </div>
         <div class="flex items-end font-bold my-[12px] gap-x-[18px]">
           <div
@@ -61,7 +61,9 @@
         <template v-if="product.status === productStatus.IN_STOCK">
           <div class="flex mt-[18px]">
             <div class="w-[120px]">Còn hàng</div>
-            <div>{{ formatValue(product.stock_quantity) }} sản phẩm</div>
+            <div>
+              {{ formatCompactNumber(product.stock_quantity) }} sản phẩm
+            </div>
           </div>
           <div class="product-infor mt-[18px]">
             <div class="flex items-center">
@@ -118,14 +120,12 @@
 </template>
 
 <script setup lang="ts">
-import { markRaw } from 'vue'
 import ImageLoading from "@/components/common/image-loading.vue";
 import StarRate from "@/components/common/product/star-rate.vue";
-import { Star, StarFilled, Minus, Plus, ShoppingCart } from "@element-plus/icons-vue";
-import { ElMessage, ElMessageBox } from "element-plus";
+import { Star, StarFilled, Minus, Plus } from "@element-plus/icons-vue";
 import { useRoute } from "vue-router";
 import { useCartStore } from "@/stores/cart";
-import { formatPrice, formatValue } from "@/libs/formatter";
+import { formatPrice, formatCompactNumber } from "@/libs/formatter";
 import { productStatus } from "@/const/product-status";
 import type { ProductDetail } from "@/types/users/product-detail";
 
@@ -178,18 +178,21 @@ const handleConfirmCart = () => {
     {
       confirmButtonText: "OK",
       cancelButtonText: "Hủy bỏ",
-      type: "success",
-      icon: markRaw(ShoppingCart),
     }
-  )
-    .then(() => {
-      cartStore.addToCart(props.product, formData.value.quantity);
-      ElMessage({
-        message: "Thêm vào giỏ hàng thành công",
-        type: "success",
-        duration: 1500,
-        showClose: true,
-      });
-    })
+  ).then(() => {
+    cartStore.addToCart(
+      {
+        id: props.product.id,
+        name: props.product.name,
+        images: props.product.images,
+        price: props.product.price,
+        percent_sale: props.product.percent_sale,
+        stock_quantity: props.product.stock_quantity,
+        status: props.product.status,
+      },
+      formData.value.quantity
+    );
+    ElMessage({ message: "Thêm vào giỏ hàng thành công", type: "success" });
+  });
 };
 </script>

@@ -4,9 +4,9 @@
       <div id="product-profile">
         <div class="pb-[12px]">
           <!-- overview component -->
-          <OverviewComponent :product="product"/>
+          <OverviewComponent :product="product" />
           <!-- maker component -->
-          <MakerComponent />
+          <MakerComponent :maker="product.maker" />
           <!-- detail and rating component -->
           <InforComponent :product="product" />
         </div>
@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import OverviewComponent from "@/components/user/product/overview.vue";
 import MakerComponent from "@/components/user/product/maker.vue";
-import InforComponent from "~/components/user/product/infor.vue";
+import InforComponent from "@/components/user/product/infor.vue";
 import type { ProductDetail } from "@/types/users/product-detail";
 
 definePageMeta({
@@ -48,6 +48,14 @@ const product = ref<ProductDetail>({
   percent_sale: 5,
   rating: 3.5,
   sold: 511100,
+  maker: {
+    id: 1,
+    name: "Faruiline Official Store",
+    image_url: "/images/devices/phone/dienthoai-1.webp",
+    percent_rating: 99,
+    total_product: 1200,
+    joined_at: "2019/11/25",
+    last_login_at: "2025/7/24 8:00:00",
+  },
 });
-
 </script>

@@ -31,6 +31,14 @@ input, optgroup, select, textarea {
     padding: 0 12px;
 }
 
+button:disabled {
+    opacity: 0.5;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
 /* ==================== Custom style element plus ==================== */
 .el-form-item__label {
     margin-bottom: 0px !important;
