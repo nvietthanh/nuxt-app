@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   css: [
     '@/assets/css/tailwind.css',
     '@/assets/css/base.css',
+    'bootstrap-icons/font/bootstrap-icons.css',
   ],
   modules: [
     '@nuxtjs/tailwindcss',
