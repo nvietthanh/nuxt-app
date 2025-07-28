@@ -149,6 +149,8 @@ import ImageLoading from "@/components/common/image-loading.vue";
 
 definePageMeta({
   name: "cart",
+  middleware: "auth",
+  roles: ["user"],
 });
 
 const cartStore = useCartStore();
