@@ -1,11 +1,13 @@
-import type { ProductStatus } from "@/const/product-status";
+import type { ProductImage } from "./product-image";
+import type { ProductStatus } from "./product-status";
 
-export interface Cart {
+export interface ProductCart {
   id: number;
   name: string;
-  image: string;
+  images: ProductImage[];
   price: number;
-  quantity: number;
+  stock_quantity: number;
   percent_sale: number;
   status: ProductStatus;
+  purchase_quantity: number;
 }

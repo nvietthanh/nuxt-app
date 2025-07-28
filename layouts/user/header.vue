@@ -47,9 +47,9 @@
           </div>
         </div>
         <div class="flex items-center">
-          <a href="route('form-login')"> Đăng nhập </a>
+          <NuxtLink :to="{ name: 'login' }"> Đăng nhập </NuxtLink>
           <div class="w-[1px] h-[14px] bg-[#fff] mx-[8px]"></div>
-          <a href="route('form-register')"> Đăng ký </a>
+          <NuxtLink :to="{ name: 'register' }"> Đăng ký </NuxtLink>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
               <i class="bi bi-search"></i>
             </button>
           </div>
-          <HeaderNotice :notices="[]"/>
+          <HeaderNotice :notices="[]" />
           <HeaderCart :cart-products="cartProducts" />
         </div>
       </div>
@@ -113,7 +113,7 @@ import { useRouter, useRoute } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import { useCartStore } from "@/stores/cart";
 import type { User } from "@/types/user";
-import type { Cart } from "@/types/users/cart";
+import type { ProductCart } from "@/types/users/cart";
 
 const { $axios } = useNuxtApp();
 const router = useRouter();
@@ -124,7 +124,9 @@ const cartStore = useCartStore();
 const isShowMenu = ref<boolean>(false);
 const keyword = ref<string | null>(null);
 const user = ref<User | null>(null);
-const cartProducts = ref<Cart[]>(cartStore.items);
+const cartProducts = computed((): ProductCart[] => {
+  return cartStore.items;
+});
 
 onMounted(() => {
   const queryKeyword = route.query.keyword as string | null;

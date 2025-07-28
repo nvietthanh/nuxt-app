@@ -27,7 +27,7 @@
           <StarRate :rate="product.rating" disabled />
         </div>
         <span class="product-sold ml-[8px] text-[11px] mb-[-4px]">
-          Đã bán {{ formatValue(product.sold) }}
+          Đã bán {{ formatCompactNumber(product.sold) }}
         </span>
       </div>
       <div class="mt-[6px]">
@@ -41,7 +41,7 @@
 import ImageLoading from "@/components/common/image-loading.vue";
 import StarRate from "@/components/common/product/star-rate.vue";
 import type { Product } from "@/types/users/product";
-import { formatPrice, formatValue } from "@/libs/formatter";
+import { formatPrice, formatCompactNumber } from "@/libs/formatter";
 
 const props = withDefaults(
   defineProps<{
