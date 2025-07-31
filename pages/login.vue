@@ -104,7 +104,8 @@
 <script setup lang="ts">
 import type { FormRules } from "element-plus";
 import { validationMessages } from "@/utils/validation";
-import ImageLoading from "~/components/common/image-loading.vue";
+import ImageLoading from "@/components/common/image-loading.vue";
+import { useRoute, useRouter } from "vue-router";
 
 definePageMeta({
   name: "login",
@@ -116,6 +117,8 @@ interface LoginForm {
   remember?: boolean | null;
 }
 
+const router = useRouter();
+const route = useRoute();
 const { $axios, $errors } = useNuxtApp();
 const { refCustomForm, loadingForm, doSubmit } = useForm();
 
@@ -154,7 +157,11 @@ const rules = reactive<FormRules<LoginForm>>({
 const handleLogin = async () => {
   $errors.clear();
 
-  await $axios.post("/v1/login", formData.value);
+  const redirectUrl = (route.query.redirect as string) || "/";
+
+  router.push(redirectUrl);
+
+  // await $axios.post("/v1/login", formData.value);
 };
 </script>
 <style scoped>

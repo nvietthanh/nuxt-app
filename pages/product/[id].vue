@@ -28,8 +28,8 @@ const product = ref<ProductDetail>({
   id: 1,
   name: "OPPO Reno10 5G 256GB Xanh",
   images: [
-    { id: 1, url: "/images/devices/phone/dienthoai-1.webp" },
-    { id: 1, url: "/images/devices/phone/dienthoai-1.webp" },
+    { id: 1, thumbnal_url: null, url: "/images/devices/phone/dienthoai-1.webp" },
+    { id: 1, thumbnal_url: null, url: "/images/devices/phone/dienthoai-1.webp" },
   ],
   description: "test",
   price: 8490000,

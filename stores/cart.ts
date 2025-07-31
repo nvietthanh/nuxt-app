@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import type { ProductCart } from "@/types/users/cart";
-import type { ProductImage } from "~/types/users/product-image";
-import type { ProductStatus } from "~/types/users/product-status";
+import type { ProductImage } from "@/types/users/product-image";
+import type { ProductStatus } from "@/types/users/product-status";
 
 interface ProductItem {
   id: number;

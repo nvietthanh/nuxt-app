@@ -107,6 +107,7 @@
               Thêm vào giỏ hàng
             </button>
             <button
+              @click="handleBuyNowProduct()"
               class="px-[18px] h-[44px] flex items-center border-[1px] border-[#d0011b] text-[white] bg-[#d0011b] rounded-[4px]"
             >
               <i class="bi bi-cart-plus text-[20px] mr-[4px]"></i>
@@ -138,6 +139,7 @@ interface CartForm {
 
 const route = useRoute();
 const cartStore = useCartStore();
+const { ensureUser } = useRequireAuth();
 
 const productId = Number(route.params.id);
 const formData = ref<CartForm>({
@@ -172,6 +174,8 @@ const handleChangeCart = () => {
   }
 };
 const handleConfirmCart = () => {
+  if (!ensureUser()) return;
+
   ElMessageBox.confirm(
     "Bạn có muốn thêm sản phẩm vào giỏ hàng không?",
     "Xác nhận",
@@ -194,5 +198,9 @@ const handleConfirmCart = () => {
     );
     ElMessage({ message: "Thêm vào giỏ hàng thành công", type: "success" });
   });
+};
+
+const handleBuyNowProduct = () => {
+  if (!ensureUser()) return;
 };
 </script>

@@ -1,4 +1,5 @@
 <template>
+  <LoadingIndicator v-if="loadingStore.isLoading" />
   <header v-if="isHeader" class="relative" style="z-index: 100">
     <Header />
   </header>
@@ -17,8 +18,10 @@
 <script setup lang="ts">
 import Header from "./header.vue";
 import Footer from "./footer.vue";
+import { useLoadingStore } from "@/stores/loading";
+import LoadingIndicator from "@/components/common/loading-indicator.vue";
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     isFooter?: boolean;
     isHeader?: boolean;
@@ -28,6 +31,8 @@ const props = withDefaults(
     isHeader: true,
   }
 );
+
+const loadingStore = useLoadingStore();
 </script>
 
 <style>

@@ -28,12 +28,12 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <a
-            href="route('buyer.notice')"
-            class="button mb-[4px] mt-[8px] w-[140px] text-center h-[34px] leading-[34px] border-[1px] text-[white] bg-[#d0011b]"
+          <button
+            class="mb-[4px] mt-[8px] w-[140px] text-center h-[34px] leading-[34px] border-[1px] text-[white] bg-[#d0011b]"
+            @click="handleGoToNotice()"
           >
             Xem tất cả
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -41,5 +41,18 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+
 defineProps<{ notices: object[] }>();
+
+const router = useRouter();
+const { ensureUser } = useRequireAuth();
+
+const handleGoToNotice = () => {
+  if (!ensureUser()) return;
+
+  router.push({
+    name: "notice",
+  });
+};
 </script>
