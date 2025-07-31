@@ -43,9 +43,11 @@
                   <div class="ml-[18px] text-[14px]">
                     <div class="text-[#d0021c]">
                       {{
-                        calculateDiscountedPrice(
-                          product.price,
-                          product.percent_sale
+                        formatPrice(
+                          calculateDiscountedPrice(
+                            product.price,
+                            product.percent_sale
+                          )
                         )
                       }}
                     </div>
@@ -73,13 +75,13 @@
 <script setup lang="ts">
 import { formatPrice } from "@/libs/formatter";
 import type { ProductCart } from "@/types/users/cart";
-import ImageLoading from "~/components/common/image-loading.vue";
+import ImageLoading from "@/components/common/image-loading.vue";
 
 withDefaults(defineProps<{ cartProducts?: ProductCart[] }>(), {
   cartProducts: () => [],
 });
 
 const calculateDiscountedPrice = (price: number, percentSale: number) => {
-  return formatPrice(price - (price * percentSale) / 100);
+  return price - (price * percentSale) / 100;
 };
 </script>

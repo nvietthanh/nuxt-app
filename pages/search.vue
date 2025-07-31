@@ -22,143 +22,19 @@
                 <div
                   class="mt-[12px] ml-[8px] mb-[18px] pb-[12px] border-b-[1px]"
                 >
-                  <div>Theo danh mục</div>
-                  <div class="mt-[4px]">
-                    <div v-for="item in 4">
-                      <el-checkbox
-                        v-model="filter.sub_category"
-                        label="Thời trang nam"
-                      />
-                    </div>
-                  </div>
+                  <FilterCategory v-model="filter.category_ids" />
                 </div>
                 <div
                   class="mt-[12px] ml-[8px] mb-[18px] pb-[24px] border-b-[1px]"
                 >
-                  <div>Khoảng giá</div>
-                  <div class="mt-[8px] flex items-center">
-                    <input
-                      v-model="filter.price.min"
-                      type="text"
-                      @keyup="
-                        filter.price.min = filter.price.min?.replace(/\D/g, '')
-                      "
-                      placeholder="Từ"
-                      class="w-[90px] h-[36px] text-[13px]"
-                    />
-                    <span class="mx-[8px] text-[18px]">-</span>
-                    <input
-                      v-model="filter.price.max"
-                      type="text"
-                      @keyup="
-                        filter.price.max = filter.price.max?.replace(/\D/g, '')
-                      "
-                      placeholder="Đến"
-                      class="w-[90px] h-[36px] text-[13px]"
-                    />
-                  </div>
+                  <FilterPrice v-model="filter.price" />
                 </div>
                 <div
                   class="mt-[12px] ml-[8px] mb-[18px] pb-[24px] border-b-[1px]"
                 >
-                  <div>Đánh giá</div>
-                  <div class="mt-[8px] text-[#fb6e30] text-[16px]">
-                    <div
-                      @click="filter.vote = 5"
-                      class="mb-[4px] cursor-pointer"
-                    >
-                      <div
-                        class="flex"
-                        :class="{
-                          'bg-[#e6e9eb] rounded-[12px]': filter.vote == 5,
-                        }"
-                      >
-                        <i
-                          v-for="item in 5"
-                          class="bi bi-star-fill ml-[12px]"
-                        ></i>
-                      </div>
-                    </div>
-                    <div
-                      @click="filter.vote = 4"
-                      class="mb-[4px] cursor-pointer"
-                    >
-                      <div
-                        class="flex"
-                        :class="{
-                          'bg-[#e6e9eb] rounded-[12px]': filter.vote == 4,
-                        }"
-                      >
-                        <i
-                          v-for="item in 4"
-                          class="bi bi-star-fill ml-[12px]"
-                        ></i>
-                        <i class="bi bi-star ml-[12px]"></i>
-                        <span class="ml-[6px] text-[14px] text-[#000]">
-                          (trở lên)
-                        </span>
-                      </div>
-                    </div>
-                    <div
-                      @click="filter.vote = 3"
-                      class="mb-[4px] cursor-pointer"
-                    >
-                      <div
-                        class="flex"
-                        :class="{
-                          'bg-[#e6e9eb] rounded-[12px]': filter.vote == 3,
-                        }"
-                      >
-                        <i
-                          v-for="item in 3"
-                          class="bi bi-star-fill ml-[12px]"
-                        ></i>
-                        <i v-for="item in 2" class="bi bi-star ml-[12px]"></i>
-                        <span class="ml-[6px] text-[14px] text-[#000]"
-                          >(trở lên)</span
-                        >
-                      </div>
-                    </div>
-                    <div
-                      @click="filter.vote = 2"
-                      class="mb-[4px] cursor-pointer"
-                    >
-                      <div
-                        class="flex"
-                        :class="{
-                          'bg-[#e6e9eb] rounded-[12px]': filter.vote == 2,
-                        }"
-                      >
-                        <i
-                          v-for="item in 2"
-                          class="bi bi-star-fill ml-[12px]"
-                        ></i>
-                        <i v-for="item in 3" class="bi bi-star ml-[12px]"></i>
-                        <span class="ml-[6px] text-[14px] text-[#000]"
-                          >(trở lên)</span
-                        >
-                      </div>
-                    </div>
-                    <div
-                      @click="filter.vote = 1"
-                      class="mb-[4px] cursor-pointer"
-                    >
-                      <div
-                        class="flex"
-                        :class="{
-                          'bg-[#e6e9eb] rounded-[12px': filter.vote == 1,
-                        }"
-                      >
-                        <i class="bi bi-star-fill ml-[12px]"></i>
-                        <i v-for="item in 4" class="bi bi-star ml-[12px]"></i>
-                        <span class="ml-[6px] text-[14px] text-[#000]"
-                          >(trở lên)</span
-                        >
-                      </div>
-                    </div>
-                  </div>
+                  <FilterRate v-model="filter.rate" />
                 </div>
-                <div @click="searchProduct()" class="w-[100%] cursor-pointer">
+                <div @click="handleSearch()" class="w-[100%] cursor-pointer">
                   <div
                     class="text-center cursor-pointer h-[38px] leading-[38px] border-[1px] text-[white] bg-[#d0011b]"
                   >
@@ -170,47 +46,15 @@
           </div>
           <div class="lg:col-start-4 col-start-5 col-end-13">
             <div class="px-[14px] py-[18px] bg-[white]">
-              <div class="mb-[24px] font-bold text-[18px]">
+              <div
+                v-if="filter.keyword"
+                class="mb-[24px] font-bold text-[18px]"
+              >
                 Từ khóa tìm kiếm:
-                <span class="text-[#d0011b]">Sản phẩm nổi tiếng</span>
+                <span class="text-[#d0011b]">{{ filter.keyword }}</span>
               </div>
               <div class="mb-[18px] flex md:gap-4 gap-2 text-[13px]">
-                <div
-                  @click="filter.sort = 'default'"
-                  class="md:py-[8px] py-[4px] md:px-[18px] px-[8px] flex justify-center text-center items-center border-[1px] border-[#000] cursor-pointer"
-                  :class="{
-                    'bg-[#d0011b] text-white': filter.sort == 'default',
-                  }"
-                >
-                  Đề xuất
-                </div>
-                <div
-                  @click="filter.sort = 'created_at'"
-                  class="md:py-[8px] py-[4px] md:px-[18px] px-[8px] flex justify-center text-center items-center border-[1px] border-[#000] cursor-pointer"
-                  :class="{
-                    'bg-[#d0011b] text-white': filter.sort == 'created_at',
-                  }"
-                >
-                  Mới nhất
-                </div>
-                <div
-                  @click="filter.sort = 'price_asc'"
-                  class="flex-1 max-w-[150px] md:py-[8px] py-[4px] md:px-[18px] px-[8px] flex justify-center text-center items-center border-[1px] border-[#000] cursor-pointer"
-                  :class="{
-                    'bg-[#d0011b] text-white': filter.sort == 'price_asc',
-                  }"
-                >
-                  Giá cao đến thấp
-                </div>
-                <div
-                  @click="filter.sort = 'price_desc'"
-                  class="flex-1 max-w-[150px] md:py-[8px] py-[4px] md:px-[18px] px-[8px] flex justify-center text-center items-center border-[1px] border-[#000] cursor-pointer"
-                  :class="{
-                    'bg-[#d0011b] text-white': filter.sort == 'price_desc',
-                  }"
-                >
-                  Giá thấp đến cao
-                </div>
+                <FilterSort v-model="filter.sort" @change="handleSearch" />
               </div>
               <div
                 class="mb-[18px] relative sm:hidden block"
@@ -227,129 +71,45 @@
                   Giá thấp đến cao
                 </div>
                 <div
-                  class="absolute top-[100%] left-0 right-0 block"
+                  class="absolute top-[100%] left-0 right-0 block z-[1]"
                   :class="{ hidden: !openMenuMobile }"
                 >
                   <div class="mt-[2px] border-[1px] border-[#000] bg-[white]">
                     <div class="px-[12px]">
                       <div class="mt-[12px] ml-[8px] pb-[12px]">
-                        <div class="font-bold">Theo danh mục</div>
-                        <div class="mt-[4px]">
-                          <div v-for="item in 4">
-                            <el-checkbox
-                              v-model="filter.sub_category"
-                              label="Thời trang nam"
-                            />
-                          </div>
-                        </div>
+                        <FilterCategory v-model="filter.category_ids" />
                       </div>
                       <div class="ml-[8px] pb-[18px]">
                         <div class="font-bold">Khoảng giá</div>
-                        <div class="mt-[8px] flex items-center">
-                          <input
-                            v-model="filter.price.min"
-                            type="text"
-                            @keyup="
-                              filter.price.min = filter.price.min.replace(
-                                /\D/g,
-                                ''
-                              )
-                            "
-                            placeholder="Từ"
-                            class="w-[90px] h-[36px] text-[13px]"
-                          />
-                          <span class="mx-[8px] text-[18px]">-</span>
-                          <input
-                            v-model="filter.price.max"
-                            type="text"
-                            @keyup="
-                              filter.price.max = filter.price.max.replace(
-                                /\D/g,
-                                ''
-                              )
-                            "
-                            placeholder="Đến"
-                            class="w-[90px] h-[36px] text-[13px]"
-                          />
-                        </div>
+                        <FilterPrice v-model="filter.price" />
                       </div>
                       <div class="ml-[8px] pb-[18px]">
-                        <div class="font-bold">Đánh giá</div>
-                        <div class="mt-[4px] text-[16px]">
-                          <el-radio-group v-model="filter.vote">
-                            <el-radio :label="5" class="w-[100px]"
-                              >5 sao</el-radio
-                            >
-                            <el-radio :label="4" class="w-[100px]"
-                              >4 sao (trở lên)</el-radio
-                            >
-                            <el-radio :label="3" class="w-[100px]"
-                              >3 sao (trở lên)</el-radio
-                            >
-                            <el-radio :label="2" class="w-[100px]"
-                              >2 sao (trở lên)</el-radio
-                            >
-                            <el-radio :label="1" class="w-[100px]"
-                              >1 sao (trở lên)</el-radio
-                            >
-                          </el-radio-group>
-                        </div>
+                        <FilterRate v-model="filter.rate" />
                       </div>
                     </div>
                     <div class="flex justify-end cursor-pointer">
-                      <div
-                        @click="searchProduct()"
-                        class="mb-[32px] mr-[32px] w-[120px] text-center cursor-pointer h-[38px] leading-[38px] border-[1px] text-[white] bg-[#d0011b]"
+                      <button
+                        @click="handleSearch()"
+                        class="mb-[32px] mr-[32px] w-[120px] text-center h-[38px] border-[1px] text-[white] bg-[#d0011b]"
                       >
                         Áp dụng
-                      </div>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="grid sm:grid-cols-4 grid-cols-2 gap-4">
-                <div
-                  v-for="index in 8"
-                  class="bg-[white] border-[1px] rounded-[4px] mb-[12px]"
-                >
-                  <a href="route('product', 1)">
-                    <img
-                      :src="'/images/devices/phone/dienthoai-1.webp'"
-                      alt=""
-                      class="w-[100%] rounded-t-[4px] border-b-[1px] border-[#D8D9DA]"
-                    />
-                    <div class="px-[12px] pb-[12px] mt-[8px] mb-[19px]">
-                      <div>OPPO Reno10 5G 256GB Xanh</div>
-                      <div class="font-bold my-[4px]">
-                        <div class="flex items-end text-[12px]">
-                          <div class="line-through">8.490.000₫</div>
-                          <div class="text-[14px] ml-[18px] text-[#d0021c]">
-                            -5%
-                          </div>
-                        </div>
-                        <div class="text-[#d0021c] text-[14px]">8.490.000₫</div>
-                      </div>
-                      <div class="flex items-center">
-                        <div class="text-[#fb6e30] text-[10px]">
-                          <i class="bi bi-star-fill mr-[2px]"></i>
-                          <i class="bi bi-star-fill mr-[2px]"></i>
-                          <i class="bi bi-star-fill mr-[2px]"></i>
-                          <i class="bi bi-star-fill mr-[2px]"></i>
-                          <i class="bi bi-star-half mr-[2px]"></i>
-                        </div>
-                        <span class="ml-[8px] text-[12px]">Đã bán 0k</span>
-                      </div>
-                    </div>
-                  </a>
-                </div>
+                <template v-for="index in 8">
+                  <ProductCard />
+                </template>
               </div>
               <div class="mt-[18px] mb-[24px] flex justify-center">
-                <!-- <Paginate
-                           @page-change="handleCurrentPage"
-                           :paginate="paginate"
-                           :current-page="filter.page || 1"
-                           paginate-background
-                        /> -->
+                <PaginateComponent
+                  :paginate="paginate"
+                  :current-page="paginateFilter.page"
+                  @page-change="handleChangeCurrentPage"
+                  paginate-background
+                />
               </div>
             </div>
           </div>
@@ -359,31 +119,105 @@
   </NuxtLayout>
 </template>
 <script setup lang="ts">
-
-interface PriceRange {
-  min: string;
-  max: string;
-}
+import FilterCategory from "@/components/user/product-filter/category.vue";
+import FilterPrice from "@/components/user/product-filter/price.vue";
+import FilterRate from "@/components/user/product-filter/rate.vue";
+import FilterSort from "@/components/user/product-filter/sort.vue";
+import ProductCard from "@/components/common/product/card.vue";
+import PaginateComponent from "@/components/user/pagination/paginate.vue";
+import type { PaginateFilter } from "@/types/paginate-filter";
+import type { Paginate } from "@/types/paginate";
+import type { PriceRange } from "@/types/users/product-filter";
+import {
+  useRoute,
+  useRouter,
+  type RouteLocationNormalizedLoaded,
+} from "vue-router";
 
 interface Filter {
-  sub_category: string;
+  keyword: string | null;
+  category_ids: Array<number> | undefined;
   price: PriceRange;
   sort: string;
-  vote: number | undefined;
+  rate: number | undefined;
 }
 
+const route = useRoute();
+const router = useRouter();
+
 const openMenuMobile = ref<boolean>(false);
+const paginate = ref<Paginate>({
+  per_page: 30,
+  total: 3000,
+});
+const paginateFilter = ref<PaginateFilter>({
+  page: 1,
+  limit: 30,
+});
 const filter = ref<Filter>({
-  sub_category: "",
+  keyword: null,
+  category_ids: undefined,
   price: {
-    min: "",
-    max: "",
+    min: null,
+    max: null,
   },
-  sort: "",
-  vote: undefined,
+  sort: "recommend",
+  rate: undefined,
 });
 
-const searchProduct = () => {
+onMounted(() => {
+  updateFilterFromQuery(route.query);
+});
+onBeforeRouteUpdate((to) => {
+  updateFilterFromQuery(to.query);
+});
+
+const updateFilterFromQuery = (
+  query: RouteLocationNormalizedLoaded["query"]
+) => {
+  const rawCategoryIds = query.category_ids;
+  let categoryIds = undefined;
+
+  if (Array.isArray(rawCategoryIds)) {
+    categoryIds = rawCategoryIds
+      .map((id) => parseInt(String(id)))
+      .filter(Number.isFinite);
+  } else if (typeof rawCategoryIds === "string") {
+    categoryIds = [parseInt(rawCategoryIds)].filter(Number.isFinite);
+  }
+
+  filter.value = {
+    keyword: query.keyword?.toString() ?? null,
+    category_ids: categoryIds,
+    price: {
+      min: query.price_min != undefined ? Number(query.price_min) : null,
+      max: query.price_max != undefined ? Number(query.price_max) : null,
+    },
+    sort: query.sort?.toString() ?? "recommend",
+    rate: query.rate != undefined ? Number(query.rate) : undefined,
+  };
+};
+const handleChangeCurrentPage = (page: number) => {
+  paginateFilter.value.page = page;
+};
+const handleSearch = () => {
+  const query: Record<string, any> = {
+    ...(filter.value.keyword && { keyword: filter.value.keyword }),
+    ...(filter.value.category_ids && {
+      category_ids: filter.value.category_ids,
+    }),
+    ...(filter.value.sort && { sort: filter.value.sort }),
+    ...(filter.value.rate && { rate: filter.value.rate }),
+    ...(filter.value.price?.min != null && {
+      price_min: filter.value.price.min,
+    }),
+    ...(filter.value.price?.max != null && {
+      price_max: filter.value.price.max,
+    }),
+    page: 1,
+  };
+
+  router.push({ path: route.path, query });
   openMenuMobile.value = false;
 };
 </script>
