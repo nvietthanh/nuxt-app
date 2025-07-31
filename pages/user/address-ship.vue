@@ -72,6 +72,10 @@ import SlidebarComponent from "@/components/user/profile/slidebar.vue";
 import type { Address } from "~/types/users/address";
 import FormComponent from "@/components/user/address-ship/form.vue";
 
+definePageMeta({
+  name: "address-ship",
+});
+
 const refAddressForm = ref();
 const listAddress = ref<Address[]>([
   {
@@ -104,7 +108,7 @@ const listAddress = ref<Address[]>([
 ]);
 
 const handleUpdateAddress = (index: number) => {
-  refAddressForm.value.open()
+  refAddressForm.value.open();
 };
 const handleSetDefaultAddress = (index: number) => {
   listAddress.value.forEach((address, i) => {
