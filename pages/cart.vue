@@ -210,9 +210,9 @@ const handleDecreaseQuantity = (product: ProductCart) => {
       }
     ).then(() => {
       handleRemoveCart(product.id);
-      ElMessage({
+      ElMessage.success({
         message: "Xóa sản phẩm trong giỏ hàng thành công",
-        type: "success",
+        grouping: true,
       });
     });
     return;

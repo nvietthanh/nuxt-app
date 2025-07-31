@@ -5,4 +5,5 @@ export interface Address {
   phone_number: string;
   address: string;
   location_type: number;
+  is_default: boolean;
 }

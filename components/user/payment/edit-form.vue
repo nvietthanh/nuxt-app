@@ -2,7 +2,7 @@
   <el-dialog
     v-model="dialogVisible"
     id="edit-address-pay"
-    class="bg-[#fff] max-h-[90%] sm:min-w-[450px] sm:max-w-[450px] min-w-[95%] mt-[32px]"
+    class="bg-[#fff] max-h-[90%] sm:min-w-[500px] sm:max-w-[500px] min-w-[95%] mt-[32px]"
     :show-close="true"
   >
     <template #header>
@@ -14,7 +14,7 @@
         }}
       </div>
     </template>
-    <div class="overflow-scroll max-h-[400px] min-h-[300px] pb-[32px]">
+    <div class="overflow-y-auto max-h-[500px] min-h-[300px] pb-[32px]">
       <div
         v-if="tabSelected == 'tab_choose_address'"
         class="px-[12px] py-[8px] sm:mx-[12px]"
@@ -123,6 +123,7 @@ const handleCreatedAddress = (address: any) => {
     phone_number: address.phone_number,
     address: address.address,
     location_type: address.location_type,
+    is_default: false,
   });
 
   tabSelected.value = "tab_choose_address";

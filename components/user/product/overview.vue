@@ -196,7 +196,10 @@ const handleConfirmCart = () => {
       },
       formData.value.quantity
     );
-    ElMessage({ message: "Thêm vào giỏ hàng thành công", type: "success" });
+    ElMessage.success({
+      message: "Thêm vào giỏ hàng thành công",
+      grouping: true,
+    });
   });
 };
 

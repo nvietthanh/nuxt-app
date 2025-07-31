@@ -40,6 +40,14 @@ button:hover {
 }
 
 /* ==================== Custom style element plus ==================== */
+.el-form-item:not(.is-error) {
+    margin-bottom: 8px !important;
+}
+
+.el-form-item.is-error {
+    margin-bottom: 2px !important;
+}
+
 .el-form-item__label {
     margin-bottom: 0px !important;
     font-weight: 500 !important;

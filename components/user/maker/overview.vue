@@ -99,7 +99,10 @@ const handleFollow = () => {
     confirmButtonText: "OK",
     cancelButtonText: "Hủy bỏ",
   }).then(() => {
-    ElMessage({ message: "Theo dõi tác giả thành công", type: "success" });
+    ElMessage.success({
+      message: "Theo dõi tác giả thành công",
+      grouping: true,
+    });
   });
 };
 </script>

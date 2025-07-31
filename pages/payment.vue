@@ -139,6 +139,7 @@ const listAddress = ref<Address[]>([
     phone_number: "035414151111",
     address: "PN, CM, Hà Nội",
     location_type: 1,
+    is_default: true,
   },
   {
     id: 2,
@@ -147,6 +148,7 @@ const listAddress = ref<Address[]>([
     phone_number: "035414151111",
     address: "PN, CM, Hà Nội",
     location_type: 1,
+    is_default: false,
   },
   {
     id: 3,
@@ -155,6 +157,7 @@ const listAddress = ref<Address[]>([
     phone_number: "035414151111",
     address: "PN, CM, Hà Nội",
     location_type: 1,
+    is_default: false,
   },
 ]);
 

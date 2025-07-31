@@ -49,7 +49,6 @@
       prop="address"
       :inline-message="$errors.has('address')"
       :error="$errors.first('address')"
-      class="mt-[18px]"
     >
       <el-input
         v-model="formData.address"
@@ -59,14 +58,18 @@
         clearable
       />
     </el-form-item>
-  </el-form>
-  <div class="mt-[18px]">
-    <div class="mb-[4px]">Loại địa chỉ</div>
+    <el-form-item
+      label="Loại địa chỉ"
+      prop="location_type"
+      :inline-message="$errors.has('location_type')"
+      :error="$errors.first('location_type')"
+    >
     <el-radio-group v-model="formData.location_type" size="large">
       <el-radio :value="1" size="large" border>Nhà riêng</el-radio>
       <el-radio :value="2" size="large" border>Văn phòng</el-radio>
     </el-radio-group>
-  </div>
+    </el-form-item>
+  </el-form>
 </template>
 <script setup lang="ts">
 import type { FormRules } from "element-plus";
