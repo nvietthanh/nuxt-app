@@ -44,7 +44,7 @@ const menuItems = ref([
   },
   {
     key: "ship",
-    name: "cart",
+    name: "address-ship",
     icon: "bi-truck",
     label: "Địa chỉ giao hàng",
     iconSize: "text-[18px]",
