@@ -12,50 +12,60 @@
               <i class="bi bi-chevron-right mx-[3px]"></i>
               <span class="ml-[4px]">Địa chỉ giao hàng</span>
             </div>
-            <div class="mt-[18px] mx-[12px]">
-              <div
-                v-for="(item, index) in listAddress"
-                class="sm:flex block items-center justify-between border-b-[1px] pb-[18px] mb-[24px]"
-              >
-                <div>
-                  <div class="flex gap-4">
-                    <div class="font-bold">
-                      {{ item.first_name }} {{ item.last_name }}
+            <div class="mt-[12px]">
+              <div class="flex justify-end">
+                <button
+                  class="w-[130px] h-[38px] border-[1px] text-[white] bg-[#d0011b]"
+                  @click="handleCreateAddress()"
+                >
+                  Thêm mới
+                </button>
+              </div>
+              <div class="mt-[18px] mx-[12px]">
+                <div
+                  v-for="(item, index) in listAddress"
+                  class="sm:flex block items-center justify-between border-b-[1px] pb-[18px] mb-[24px]"
+                >
+                  <div>
+                    <div class="flex gap-4">
+                      <div class="font-bold">
+                        {{ item.first_name }} {{ item.last_name }}
+                      </div>
+                      <div class="w-[2px] bg-[#bebebe]"></div>
+                      <div>{{ item.phone_number }}</div>
                     </div>
-                    <div class="w-[2px] bg-[#bebebe]"></div>
-                    <div>{{ item.phone_number }}</div>
-                  </div>
-                  <div class="mt-[8px]">{{ item.address }}</div>
-                  <div
-                    class="mt-[8px] w-[100px] text-[#d0011b] py-[4px] border-[1px] border-[#d0011b] text-center"
-                    v-if="item.is_default"
-                  >
-                    Mặc định
-                  </div>
-                </div>
-                <div>
-                  <div class="flex justify-end gap-4">
-                    <button
-                      class="text-[blue]"
-                      @click="handleUpdateAddress(index)"
+                    <div class="mt-[8px]">{{ item.address }}</div>
+                    <div
+                      class="mt-[8px] w-[100px] text-[#d0011b] py-[4px] border-[1px] border-[#d0011b] text-center"
+                      v-if="item.is_default"
                     >
-                      Chỉnh sửa
-                    </button>
-                    <button
-                      class="text-[blue]"
-                      @click="handleDeleteAddress(index)"
-                    >
-                      Xóa
-                    </button>
+                      Mặc định
+                    </div>
                   </div>
-                  <div class="flex justify-end">
-                    <button
-                      v-if="!item.is_default"
-                      class="mt-[8px] w-[150px] text-[#d0011b] py-[6px] border-[1px] border-[#bebebe]"
-                      @click="handleSetDefaultAddress(index)"
-                    >
-                      Thiết lập mặc định
-                    </button>
+                  <div>
+                    <div class="flex justify-end gap-4">
+                      <button
+                        class="text-[blue]"
+                        @click="handleUpdateAddress(item)"
+                      >
+                        Chỉnh sửa
+                      </button>
+                      <button
+                        class="text-[blue]"
+                        @click="handleDeleteAddress(index)"
+                      >
+                        Xóa
+                      </button>
+                    </div>
+                    <div class="flex justify-end">
+                      <button
+                        v-if="!item.is_default"
+                        class="mt-[8px] w-[150px] text-[#d0011b] py-[6px] border-[1px] border-[#bebebe]"
+                        @click="handleSetDefaultAddress(index)"
+                      >
+                        Thiết lập mặc định
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -93,7 +103,7 @@ const listAddress = ref<Address[]>([
     last_name: "Thanh 2",
     phone_number: "035414151111",
     address: "PN, CM, Hà Nội",
-    location_type: 1,
+    location_type: 2,
     is_default: false,
   },
   {
@@ -107,8 +117,11 @@ const listAddress = ref<Address[]>([
   },
 ]);
 
-const handleUpdateAddress = (index: number) => {
-  refAddressForm.value.open();
+const handleCreateAddress = () => {
+  refAddressForm.value.open('create');
+}
+const handleUpdateAddress = (address: any) => {
+  refAddressForm.value.open('update', address);
 };
 const handleSetDefaultAddress = (index: number) => {
   listAddress.value.forEach((address, i) => {

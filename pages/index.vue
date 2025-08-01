@@ -133,12 +133,9 @@
             </div>
             <div class="mb-[12px]">
               <div class="grid md:grid-cols-4 lg:grid-cols-5 grid-cols-2 gap-4">
-                <div
-                  v-for="(product, index) in productSales"
-                  class="bg-[white] rounded-[4px]"
-                >
-                  <Product :product="product" />
-                </div>
+                <template v-for="item in 10">
+                  <ProductCard />
+                </template>
               </div>
               <div class="my-[12px] flex justify-center">
                 <a href="route('flashSale')">
@@ -252,12 +249,9 @@
                 </div>
               </div>
               <div class="grid md:grid-cols-4 lg:grid-cols-5 grid-cols-2 gap-4">
-                <div
-                  v-for="(product, index) in productSugestions"
-                  class="bg-[white] rounded-[4px] border-[1px] border-[#D8D9DA]"
-                >
-                  <Product :product="product" />
-                </div>
+                <template v-for="item in 10">
+                  <ProductCard />
+                </template>
               </div>
             </div>
           </div>
