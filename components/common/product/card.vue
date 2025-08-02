@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[white] rounded-[4px] border-[1px] border-[#D8D9DA]">
+  <div class="product-item bg-[white] rounded-[4px] border-[1px] border-[#D8D9DA]">
     <NuxtLink :to="{ name: 'product', params: { id: product.id } }">
       <ImageLoading
         :src="product.image"
@@ -52,7 +52,7 @@ const props = withDefaults(
       id: 1,
       name: "OPPO Reno10 5G 256GB Xanh",
       price: 8490000,
-      image: "/images/devices/phone/dienthoai-1.webp",
+      image: "/images/devices/example.webp",
       percent_sale: 5,
       rating: 3.5,
       sold: 511100,
@@ -67,3 +67,8 @@ const calculateDiscountedPrice = computed(() => {
   return price - (price * percentSale) / 100;
 });
 </script>
+<style>
+.product-item a:hover img {
+  opacity: 0.7;
+}
+</style>

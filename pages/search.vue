@@ -22,7 +22,7 @@
                 <div
                   class="mt-[12px] ml-[8px] mb-[18px] pb-[12px] border-b-[1px]"
                 >
-                  <FilterCategory v-model="filter.category_ids" />
+                  <FilterCategory v-model="filter.category_id" />
                 </div>
                 <div
                   class="mt-[12px] ml-[8px] mb-[18px] pb-[24px] border-b-[1px]"
@@ -77,7 +77,7 @@
                   <div class="mt-[2px] border-[1px] border-[#000] bg-[white]">
                     <div class="px-[12px]">
                       <div class="mt-[12px] ml-[8px] pb-[12px]">
-                        <FilterCategory v-model="filter.category_ids" />
+                        <FilterCategory v-model="filter.category_id" />
                       </div>
                       <div class="ml-[8px] pb-[18px]">
                         <div class="font-bold">Khoảng giá</div>
@@ -136,7 +136,7 @@ import {
 
 interface Filter {
   keyword: string | null;
-  category_ids: Array<number> | undefined;
+  category_id: Array<number> | undefined;
   price: PriceRange;
   sort: string;
   rate: number | undefined;
@@ -156,7 +156,7 @@ const paginateFilter = ref<PaginateFilter>({
 });
 const filter = ref<Filter>({
   keyword: null,
-  category_ids: undefined,
+  category_id: undefined,
   price: {
     min: null,
     max: null,
@@ -175,7 +175,7 @@ onBeforeRouteUpdate((to) => {
 const updateFilterFromQuery = (
   query: RouteLocationNormalizedLoaded["query"]
 ) => {
-  const rawCategoryIds = query.category_ids;
+  const rawCategoryIds = query.category_id;
   let categoryIds = undefined;
 
   if (Array.isArray(rawCategoryIds)) {
@@ -188,7 +188,7 @@ const updateFilterFromQuery = (
 
   filter.value = {
     keyword: query.keyword?.toString() ?? null,
-    category_ids: categoryIds,
+    category_id: categoryIds,
     price: {
       min: query.price_min != undefined ? Number(query.price_min) : null,
       max: query.price_max != undefined ? Number(query.price_max) : null,
@@ -203,8 +203,8 @@ const handleChangeCurrentPage = (page: number) => {
 const handleSearch = () => {
   const query: Record<string, any> = {
     ...(filter.value.keyword && { keyword: filter.value.keyword }),
-    ...(filter.value.category_ids && {
-      category_ids: filter.value.category_ids,
+    ...(filter.value.category_id && {
+      category_id: filter.value.category_id,
     }),
     ...(filter.value.sort && { sort: filter.value.sort }),
     ...(filter.value.rate && { rate: filter.value.rate }),
