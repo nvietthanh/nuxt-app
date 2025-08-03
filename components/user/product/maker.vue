@@ -41,7 +41,7 @@
         <div
           class="h-[100%] w-[100%] flex items-center py-[18px] sm:px-[18px] px-[24px]"
         >
-          <div class="w-[100%] flex items-start gap-10">
+          <div class="w-[100%] md:flex md:items-start gap-10">
             <div class="w-[30%]">
               <div class="flex">
                 <div class="w-[100px]">Đánh giá</div>

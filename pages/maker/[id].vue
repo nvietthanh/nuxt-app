@@ -35,7 +35,7 @@ const tabSelected = ref<any>("description");
 const maker = ref<MakerDetail>({
   id: 1,
   name: "Faruiline Official Store",
-  description: "Maker description",
+  description: "Cửa hàng bán đồ trang điểm, trang sức, phụ kiện cho giới trẻ.",
   image_url: "/images/devices/phone/dienthoai-1.webp",
   total_product: 1200,
   total_rating: 4.5,
@@ -70,6 +70,12 @@ const tabs = ref([
     props: {},
   },
 ]);
+
+useSeoMeta({
+  title: `Cửa hàng ${maker.value.name}`,
+  description: cutToMetaDescription(maker.value.description),
+  keywords: maker.value.name,
+});
 </script>
 <style scoped>
 :deep(.el-tabs__item) {

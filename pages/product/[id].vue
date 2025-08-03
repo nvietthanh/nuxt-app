@@ -32,7 +32,7 @@ const product = ref<ProductDetail>({
     { id: 1, url: "/images/devices/example.webp" },
     { id: 1, url: "/images/devices/example.webp" },
   ],
-  description: "test",
+  description: "Trang mua sắm trực tuyến uy tín với hàng ngàn sản phẩm từ điện thoại, đồ gia dụng, quần áo, mỹ phẩm đến hàng tiêu dùng. Giao hàng nhanh, đổi trả dễ.",
   price: 8490000,
   stock_quantity: 1200,
   category: { id: 1, name: "Category test" },
@@ -58,5 +58,11 @@ const product = ref<ProductDetail>({
     joined_at: "2019/11/25",
     last_login_at: "2025/7/24 8:00:00",
   },
+});
+
+useSeoMeta({
+  title: `Sản phẩm ${product.value.name}`,
+  description: cutToMetaDescription(product.value.description),
+  keywords: product.value.name,
 });
 </script>

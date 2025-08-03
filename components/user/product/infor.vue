@@ -8,12 +8,12 @@
         <div class="my-[18px]">
           <div class="flex mt-[12px]">
             <div class="w-[150px]">Danh mục</div>
-            <div>{{ product.category.name }}</div>
+            <div class="flex-1">{{ product.category.name }}</div>
           </div>
           <template v-for="attribute in product.attributes">
             <div class="flex mt-[12px]">
               <div class="w-[150px]">{{ attribute.name }}</div>
-              <div>{{ attribute.value }}</div>
+              <div class="flex-1">{{ attribute.value }}</div>
             </div>
           </template>
         </div>
@@ -35,17 +35,11 @@
             >
               <div class="text-[#ee4d2d] mr-[24px]">
                 <div class="text-[20px]">
-                  <span class="text-[24px]">4.4</span>
-                  trên
+                  <span class="text-[24px]">{{ product.rating }}</span>
+                  <span class="mx-[6px]">trên</span>
                   <span class="text-[24px]">5</span>
                 </div>
-                <div class="text-[17px]">
-                  <i class="bi bi-star-fill mr-[2px]"></i>
-                  <i class="bi bi-star-fill mr-[2px]"></i>
-                  <i class="bi bi-star-fill mr-[2px]"></i>
-                  <i class="bi bi-star-fill mr-[2px]"></i>
-                  <i class="bi bi-star-half mr-[2px]"></i>
-                </div>
+                <StarRate :rate="product.rating" />
               </div>
               <div class="sm:mt-[4px] mt-[12px]">
                 <div
@@ -90,40 +84,26 @@
               v-for="item in 4"
               class="flex pt-[18px] pb-[24px] border-b-[1px]"
             >
-              <img
-                :src="'/images/devices/phone/dienthoai-1.webp'"
-                alt=""
-                class="w-[60px] h-[60px] rounded-[50%] border-[1px]"
-              />
-              <div class="ml-[6px]">
-                <div class="font-bold">Nguyễn Viết Thanh</div>
-                <div class="text-[#ee4d2d] text-[13px]">
-                  <i class="bi bi-star-fill mr-[2px]"></i>
-                  <i class="bi bi-star-fill mr-[2px]"></i>
-                  <i class="bi bi-star-fill mr-[2px]"></i>
-                  <i class="bi bi-star-fill mr-[2px]"></i>
-                </div>
-                <div class="mt-[8px] break-all">
-                  Vui lòng tham khảo mẫu trước hoặc bảng kích thước để biết kích
-                  thước chi tiết. Kích thước tổng thể phần thân dưới của shop là
-                  rộng rãi, phần thân trên ôm và rộng.
-                </div>
-                <div class="mt-[12px]">
-                  <img
-                    :src="'/images/devices/phone/dienthoai-1.webp'"
-                    alt=""
-                    class="w-[60px] h-[60px] border-[1px]"
-                  />
-                </div>
+              <div>
+                <ImageLoading
+                  :src="comment.creator.image_url"
+                  :alt="comment.creator.full_name"
+                  class="w-[60px] aspect-square rounded-[50%] border-[1px]"
+                />
+              </div>
+              <div class="ml-[12px]">
+                <div class="font-bold">{{ comment.creator.full_name }}</div>
+                <StarRate :rate="product.rating" />
+                <div class="mt-[8px] break-work">{{ comment.content }}</div>
               </div>
             </div>
             <div class="mt-[18px] flex justify-center">
-              <!-- <Paginate
-                  @page-change="handleCurrentPage"
-                  :paginate="comments.paginate"
-                  :current-page="comments.filter.page || 1"
+              <PaginateComponent
+                  :paginate="paginate"
+                  :current-page="paginateFilter.page"
+                  @page-change="handleChangeCurrentPage"
                   paginate-background
-                /> -->
+                />
             </div>
           </div>
         </div>
@@ -132,7 +112,36 @@
   </div>
 </template>
 <script setup lang="ts">
+import StarRate from "~/components/common/product/star-rate.vue";
+import ImageLoading from "~/components/common/image-loading.vue";
 import type { ProductDetail } from "@/types/users/product-detail";
+import type { PaginateFilter } from "~/types/paginate-filter";
+import type { Paginate } from "~/types/paginate";
+import PaginateComponent from "@/components/user/pagination/paginate.vue";
 
 defineProps<{ product: ProductDetail }>();
+
+const comment = ref({
+  id: 1,
+  content:
+    "Vui lòng tham khảo mẫu trước hoặc bảng kích thước để biết kích thước chi tiết. Kích thước tổng thể phần thân dưới của shop là rộng rãi, phần thân trên ôm và rộng.",
+  rating: 4.4,
+  creator: {
+    id: 1,
+    full_name: "Alori Fockuaza",
+    image_url: "/test",
+  },
+});
+const paginateFilter = ref<PaginateFilter>({
+  page: 1,
+  limit: 30,
+});
+const paginate = ref<Paginate>({
+  per_page: 30,
+  total: 3000,
+});
+
+const handleChangeCurrentPage = (page: number) => {
+  paginateFilter.value.page = page;
+};
 </script>
