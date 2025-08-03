@@ -15,7 +15,7 @@
             <div class="mt-[2rem]">
               <div class="sm:block flex justify-center mb-[24px]">
                 <ImageLoading
-                  :src="'/images/devices/phone/dienthoai-1.webp'"
+                  :src="userProfile.image_url"
                   :is-lazy="false"
                   alt="Profile"
                   class="w-[150px] aspect-square border-[1px]"
@@ -101,6 +101,7 @@ definePageMeta({
 const router = useRouter();
 
 const userProfile = ref<Profile>({
+  image_url: '/test',
   email: "thanhtest@gmail.com",
   first_name: "Nguyễn Viết",
   last_name: "Thanh",
@@ -114,95 +115,3 @@ const handleEditProfile = () => {
   router.push({ name: "account.edit" });
 };
 </script>
-<!-- <script>
-import { Head, a, useForm } from '@inertiajs/vue3';
-import AppLayout from '@/Layouts/User/Layout.vue';
-import Slider from '@/Components/User/Profile/Slider.vue';
-
-export default {
-    components: {
-        Head,
-        a,
-        AppLayout,
-        Slider
-    },
-    async created() {
-    },
-    data: function () {
-        return {
-            isEditProfile: false,
-            user: {
-                first_name: 'Nguyễn',
-                last_name: 'Viết Thanh',
-                email: 'th****oi@gmai.com',
-                phone: '09****54',
-                gender: 'Nam',
-                birth_day: '16/11/2001',
-                address: 'Thôn Đồng Trữ, Xã Phú Nghĩa, Huyện Chương Mỹ, Hà Nội',
-                image: '/images/devices/phone/dienthoai-1.webp'
-            },
-            userEdit: {
-                first_name: 'Nguyễn',
-                last_name: 'Viết Thanh',
-                email: 'th****oi@gmai.com',
-                phone: '09****54',
-                gender: 'Nam',
-                birth_day: '16/11/2001',
-                address: 'Thôn Đồng Trữ, Xã Phú Nghĩa, Huyện Chương Mỹ, Hà Nội',
-                image: '/images/devices/phone/dienthoai-1.webp'
-            },
-            fileImage: '',
-            imageSelected: '',
-            errors: []
-        }
-    },
-    methods: {
-        changeImage() {
-            if(this.isEditProfile) { 
-                this.$refs.file.click()
-            }
-        },
-        async handleUploadContent(e) {
-            try {
-                const files = e.target.files || e.dataTransfer.files;
-                if (!files.length) return;
-                if (files[0].size > 5 * 1024 * 1024) {
-                    this.$message.warning(this.$i18n.t('File quá lớn, dung lượng tối đa cho phép 5MB'));
-                    return false;
-                }
-
-                const nameFile = files[0].name.substring(files[0].name.lastIndexOf('.'));
-                const valiFileType = ['.png', '.bmp', '.jpeg', '.tif', '.gif', '.jpg'];
-                if (!valiFileType.find((i) => i === nameFile)) {
-                    this.$message.warning(
-                        this.$i18n.t(`File sai định dạng. Cần thuộc các định dạng sau: `) + valiFileType.join(', ')
-                    );
-
-                    return false;
-                }
-                this.fileImage = files[0]
-                this.imageSelected = URL.createObjectURL(files[0])
-            } catch (err) {
-                console.log('handleUploadContent', err);
-            }
-        },
-        saveChange() {
-            this.isEditProfile = false
-        },
-        cancelChange() {
-            this.userEdit = this.user
-            this.imageSelected = ''
-            this.fileImage = ''
-            this.isEditProfile = false
-        }
-    }
-}
-</script>
-<style>
-[type='text']:focus {
-    --tw-ring-color: none;
-}
-.el-select .el-input__wrapper.is-focus {
-    box-shadow: 0 0 0 1px black inset !important;
-}
-</style> -->

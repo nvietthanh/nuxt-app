@@ -27,9 +27,10 @@ definePageMeta({
 const product = ref<ProductDetail>({
   id: 1,
   name: "OPPO Reno10 5G 256GB Xanh",
+  thumbnail_url: "/images/devices/example.webp",
   images: [
-    { id: 1, thumbnal_url: null, url: "/images/devices/phone/dienthoai-1.webp" },
-    { id: 1, thumbnal_url: null, url: "/images/devices/phone/dienthoai-1.webp" },
+    { id: 1, url: "/images/devices/example.webp" },
+    { id: 1, url: "/images/devices/example.webp" },
   ],
   description: "test",
   price: 8490000,

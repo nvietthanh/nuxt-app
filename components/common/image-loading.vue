@@ -1,6 +1,6 @@
 <template>
   <el-image
-    :src="src"
+    :src="src ?? undefined"
     :lazy="isLazy"
     :fit="fit"
     :alt="alt"
@@ -19,7 +19,7 @@ import { Picture as IconPicture } from "@element-plus/icons-vue";
 
 withDefaults(
   defineProps<{
-    src: string;
+    src: string | null;
     isLazy?: boolean;
     fit?: "fill" | "contain" | "cover" | "none" | "scale-down";
     alt: string;

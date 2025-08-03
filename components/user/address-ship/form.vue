@@ -7,7 +7,7 @@
   >
     <template #header>
       <div class="text-center font-bold text-[18px] text-[#d0011b]">
-        Cập nhật địa chỉ
+        {{ typeForm == 'create' ? 'Thêm địa chỉ' : 'Cập nhật địa chỉ' }}
       </div>
     </template>
     <el-form
@@ -15,8 +15,8 @@
       :model="formData"
       :rules="rules"
       label-position="top"
-      @keyup.enter.prevent="doSubmit(handleSubmit)"
       class="px-[16px] mt-[1rem] pb-[32px]"
+      @keyup.enter.prevent="doSubmit(handleSubmit)"
     >
       <div class="grid sm:grid-cols-2 grid-cols-1 sm:gap-6 gap-3">
         <el-form-item
@@ -85,19 +85,19 @@
     </el-form>
     <template #footer>
       <div class="pb-[12px] pt-[8px]">
-        <div class="flex justify-end text-[14px] mr-[24px]">
-          <div
+        <div class="flex justify-end gap-[12px] mr-[24px]">
+          <button
+            class="w-[110px] rounded-[4px] bg-[#ffffff] py-[4px] h-[32px] text-[15px] text-black border border-[#7d7f92]"
             @click="handleCancel()"
-            class="cursor-pointer flex justify-center items-center w-[110px] rounded-[4px] bg-[#ffffff] py-[4px] h-[32px] text-[15px] text-black border border-[#7d7f92]"
           >
             Hủy bỏ
-          </div>
-          <div
-            class="cursor-pointer flex justify-center items-center w-[110px] ml-[18px] rounded-[4px] bg-[#d0011b] py-[4px] h-[32px] text-[15px] text-white"
+          </button>
+          <button
+            class="w-[110px] rounded-[4px] bg-[#d0011b] py-[4px] h-[32px] text-[15px] text-white"
             @click="doSubmit(handleSubmit)"
           >
-            Cập nhật
-          </div>
+            {{ typeForm == 'create' ? 'Thêm' : 'Cập nhật' }}
+          </button>
         </div>
       </div>
     </template>
@@ -105,18 +105,22 @@
 </template>
 <script setup lang="ts">
 import type { FormRules } from "element-plus";
+import type { Address } from "~/types/users/address";
 
 interface DataForm {
+  id?: number;
   first_name: string | null;
   last_name: string | null;
   phone_number: string | null;
   address: string | null;
   location_type: number;
+  is_default?: boolean;
 }
 
 const { $axios, $errors } = useNuxtApp();
-const { refCustomForm, loadingForm, doSubmit } = useForm();
+const { refCustomForm, loadingForm, doSubmit, doClearError } = useForm();
 
+const typeForm = ref("create");
 const dialogVisible = ref<boolean>(false);
 const formData = ref<DataForm>({
   first_name: null,
@@ -183,8 +187,19 @@ const rules = reactive<FormRules<DataForm>>({
   ],
 });
 
-const open = () => {
+const open = (type: string, dataForm: any) => {
+  formData.value = {
+    id: dataForm?.id ?? undefined,
+    first_name: dataForm?.first_name ?? null,
+    last_name: dataForm?.last_name ?? null,
+    phone_number: dataForm?.phone_number ?? null,
+    address: dataForm?.address ?? null,
+    location_type: dataForm?.location_type ?? 1,
+  };
+
+  typeForm.value = type;
   dialogVisible.value = true;
+  doClearError();
 };
 const handleCancel = () => {
   dialogVisible.value = false;

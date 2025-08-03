@@ -24,6 +24,7 @@ export interface MakerShort {
 export interface ProductDetail {
   id: number;
   name: string;
+  thumbnail_url: string | null;
   images: ProductImage[];
   description: string;
   stock_quantity: number;

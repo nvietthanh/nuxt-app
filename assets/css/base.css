@@ -39,6 +39,15 @@ button:hover {
     opacity: 0.7;
 }
 
+a {
+    transition: color 0.1s;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
 /* ==================== Custom style element plus ==================== */
 .el-form-item:not(.is-error) {
     margin-bottom: 8px !important;

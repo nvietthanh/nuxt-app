@@ -3,8 +3,8 @@
     <div class="grid md:grid-cols-10 grid-cols-1 gap-6">
       <div class="md:col-start-1 md:col-end-5">
         <ImageLoading
-          src="product[0].url"
-          alt="product[0].name"
+          :src="product.images[0].url"
+          :alt="product.name"
           class="w-full aspect-square border-[1px]"
         />
         <div class="grid grid-cols-5 gap-0">
