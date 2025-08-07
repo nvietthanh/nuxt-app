@@ -167,6 +167,12 @@ const filter = ref<Filter>({
 
 onMounted(() => {
   updateFilterFromQuery(route.query);
+
+  useSeoMeta({
+    title: `Kết quả tìm kiếm ${filter.value.keyword}`,
+    description: 'Mua sắm trực tuyến mọi ngành hàng. Giao nhanh, đổi trả dễ, ưu đãi mỗi ngày.',
+    keywords: filter.value.keyword ?? "",
+  });
 });
 onBeforeRouteUpdate((to) => {
   updateFilterFromQuery(to.query);

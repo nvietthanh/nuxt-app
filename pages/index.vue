@@ -39,8 +39,13 @@ definePageMeta({
   name: "home",
 });
 
-const productSales = ref<object>();
-const productSugestions = ref<object>();
+useSeoMeta({
+  title: "Sàn thương mại điện tử - Mua sắm mọi ngành hàng, giá tốt mỗi ngày",
+  description:
+    "Trang mua sắm trực tuyến uy tín với hàng ngàn sản phẩm từ điện thoại, đồ gia dụng, quần áo, mỹ phẩm đến hàng tiêu dùng. Giao hàng nhanh, đổi trả dễ.",
+  keywords:
+    "mua sắm online, thương mại điện tử, điện thoại, gia dụng, thời trang, mỹ phẩm",
+});
 </script>
 
 <style scoped>
