@@ -50,7 +50,7 @@
                         />
                       </div>
                       <ImageLoading
-                        :src="product.images[0].thumbnal_url ?? ''"
+                        :src="product.images[0].url"
                         :alt="product.name"
                         :is-lazy="false"
                         class="ml-[8px] min-w-[60px] w-[60px] aspect-square"
@@ -161,8 +161,7 @@ cartStore.addToCart({
   images: [
     {
       id: 1,
-      thumbnal_url: "/test.png",
-      url: "/test.png",
+      url: "/images/devices/example.webp",
     },
   ],
   price: 1111,
@@ -234,18 +233,18 @@ const handleRemoveCart = (productId: number) => {
 const handlePayment = () => {};
 </script>
 <style scoped>
-:deep(#cart-component .el-checkbox__inner) {
+::v-deep(#cart-component .el-checkbox__inner) {
   width: 18px !important;
   height: 18px !important;
 }
-:deep(#cart-component .el-checkbox__inner::after) {
+::v-deep(#cart-component .el-checkbox__inner::after) {
   height: 10px !important;
   left: 6px !important;
 }
-:deep(#cart-component [type="text"]:focus) {
+::v-deep(#cart-component [type="text"]:focus) {
   --tw-ring-color: #000 !important;
 }
-:deep(#cart-component .el-checkbox:last-of-type) {
+::v-deep(#cart-component .el-checkbox:last-of-type) {
   height: auto;
 }
 </style>

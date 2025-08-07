@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="header"
-    class="fixed top-0 left-[0px] right-[0px] bg-[#d0011b] text-[#fff] border-b-[2px] border-b-[#fff]"
-  >
+  <div class="h-full bg-[#d0011b] text-[#fff]">
     <div
       class="header-menu flex justify-between items-center text-[14px] gap-[14px]"
     >
@@ -58,11 +55,12 @@
         <div class="flex justify-between items-center mr-[12px]">
           <NuxtLink :to="{ name: 'home' }" class="hidden md:block">
             <div class="flex justify-between items-center">
-              <img
+              <!-- <img
                 :src="'/images/logo/logo.png'"
                 alt="Logo trang web"
                 class="h-[60px]"
-              />
+              /> -->
+              <div class="w-[60px]">LOGO</div>
               <div
                 class="lg:block hidden w-[2px] h-[24px] bg-[#fff] ml-[4px] mr-[12px]"
               ></div>

@@ -271,7 +271,7 @@ const rules = reactive<FormRules<RegisterForm>>({
 const handleRegister = async () => {};
 </script>
 <style scoped>
-:deep(.form-register) {
+::v-deep(.form-register) {
   border-radius: 5px;
   opacity: 1;
   padding: 2px;
@@ -279,7 +279,7 @@ const handleRegister = async () => {};
   background: #fff;
   box-shadow: 0px 3px 6px #00000029;
 }
-:deep(.form-register .el-input) {
+::v-deep(.form-register .el-input) {
   width: 100%;
 }
 </style>

@@ -101,7 +101,7 @@ definePageMeta({
 const router = useRouter();
 
 const userProfile = ref<Profile>({
-  image_url: '/test',
+  image_url: null,
   email: "thanhtest@gmail.com",
   first_name: "Nguyễn Viết",
   last_name: "Thanh",

@@ -46,34 +46,16 @@
                   class="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 gap-4"
                 >
                   <div
-                    class="px-[20px] py-[4px] flex items-center justify-center rounded-[4px] text-center border-[1px] border-[#8d8d8d] cursor-pointer border-[#ee4d2d] text-[#ee4d2d]"
+                    v-for="(item, index) in tabSortComment"
+                    class="px-[20px] py-[4px] flex items-center justify-center rounded-[4px] text-center border-[1px] border-[#8d8d8d]"
+                    :class="{
+                      'cursor-pointer': commentFilter.sort != item.value,
+                      'border-[#ee4d2d] text-[#ee4d2d]':
+                        commentFilter.sort == item.value,
+                    }"
+                    @click="handleChangeSortComment(item.value)"
                   >
-                    Tất cả
-                  </div>
-                  <div
-                    class="px-[14px] py-[4px] flex items-center justify-center rounded-[4px] text-center border-[1px] border-[#8d8d8d] cursor-pointer"
-                  >
-                    5 sao (2k5)
-                  </div>
-                  <div
-                    class="px-[14px] py-[4px] flex items-center justify-center rounded-[4px] text-center border-[1px] border-[#8d8d8d] cursor-pointer"
-                  >
-                    4 sao (2k5)
-                  </div>
-                  <div
-                    class="px-[14px] py-[4px] flex items-center justify-center rounded-[4px] text-center border-[1px] border-[#8d8d8d] cursor-pointer"
-                  >
-                    3 sao (2k5)
-                  </div>
-                  <div
-                    class="px-[14px] py-[4px] flex items-center justify-center rounded-[4px] text-center border-[1px] border-[#8d8d8d] cursor-pointer"
-                  >
-                    2 sao (2k5)
-                  </div>
-                  <div
-                    class="px-[14px] py-[4px] flex items-center justify-center rounded-[4px] text-center border-[1px] border-[#8d8d8d] cursor-pointer"
-                  >
-                    1 sao (2k5)
+                    {{ item.label }}
                   </div>
                 </div>
               </div>
@@ -99,11 +81,11 @@
             </div>
             <div class="mt-[18px] flex justify-center">
               <PaginateComponent
-                  :paginate="paginate"
-                  :current-page="paginateFilter.page"
-                  @page-change="handleChangeCurrentPage"
-                  paginate-background
-                />
+                :paginate="paginate"
+                :current-page="paginateFilter.page"
+                @page-change="handleChangeCurrentPage"
+                paginate-background
+              />
             </div>
           </div>
         </div>
@@ -118,9 +100,26 @@ import type { ProductDetail } from "@/types/users/product-detail";
 import type { PaginateFilter } from "~/types/paginate-filter";
 import type { Paginate } from "~/types/paginate";
 import PaginateComponent from "@/components/user/pagination/paginate.vue";
+import {
+  useRoute,
+  useRouter,
+  type RouteLocationNormalizedLoaded,
+} from "vue-router";
+import { startLoading, stopLoading } from "@/utils/loading-helper";
 
 defineProps<{ product: ProductDetail }>();
 
+const route = useRoute();
+const router = useRouter();
+
+const tabSortComment = ref([
+  { label: "Tất cả", value: "all" },
+  { label: "5 sao", value: "5" },
+  { label: "4 sao", value: "4" },
+  { label: "3 sao", value: "3" },
+  { label: "2 sao", value: "2" },
+  { label: "1 sao", value: "1" },
+]);
 const comment = ref({
   id: 1,
   content:
@@ -129,7 +128,7 @@ const comment = ref({
   creator: {
     id: 1,
     full_name: "Alori Fockuaza",
-    image_url: "/test",
+    image_url: null,
   },
 });
 const paginateFilter = ref<PaginateFilter>({
@@ -140,8 +139,43 @@ const paginate = ref<Paginate>({
   per_page: 30,
   total: 3000,
 });
+const commentFilter = ref({
+  sort: "all",
+});
 
+onMounted(() => {
+  updateFilterFromQuery(route.query);
+});
+
+const updateFilterFromQuery = (
+  query: RouteLocationNormalizedLoaded["query"]
+) => {
+  commentFilter.value.sort = query.sort ? String(query.sort) : "all";
+  paginateFilter.value.page = query.page ? Number(query.page) : 1;
+};
+const handleChangeSortComment = (val: string) => {
+  commentFilter.value.sort = val;
+  paginateFilter.value.page = 1;
+
+  handleLoadComment();
+};
 const handleChangeCurrentPage = (page: number) => {
   paginateFilter.value.page = page;
+
+  handleLoadComment();
+};
+const handleLoadComment = () => {
+  const params = {
+    sort: commentFilter.value.sort,
+    page: paginateFilter.value.page,
+  };
+
+  startLoading();
+
+  router.push({ name: "product", query: params });
+
+  setTimeout(() => {
+    stopLoading();
+  }, 1000);
 };
 </script>

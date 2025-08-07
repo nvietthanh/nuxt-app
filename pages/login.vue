@@ -165,7 +165,7 @@ const handleLogin = async () => {
 };
 </script>
 <style scoped>
-:deep(.form-login) {
+::v-deep(.form-login) {
   border-radius: 5px;
   opacity: 1;
   padding: 2px;

@@ -36,7 +36,7 @@ const maker = ref<MakerDetail>({
   id: 1,
   name: "Faruiline Official Store",
   description: "Cửa hàng bán đồ trang điểm, trang sức, phụ kiện cho giới trẻ.",
-  image_url: "/images/devices/phone/dienthoai-1.webp",
+  image_url: "/images/devices/example.webp",
   total_product: 1200,
   total_rating: 4.5,
   follower_count: 120411,
@@ -78,24 +78,24 @@ useSeoMeta({
 });
 </script>
 <style scoped>
-:deep(.el-tabs__item) {
+::v-deep(.el-tabs__item) {
   min-width: 150px;
   font-weight: 600;
   height: 50px;
   padding-right: 0 !important;
   padding-left: 0 !important;
 }
-:deep(#tab-product.el-tabs__item) {
+::v-deep(#tab-product.el-tabs__item) {
   min-width: 180px;
 }
-:deep(#tab-product-popular.el-tabs__item) {
+::v-deep(#tab-product-popular.el-tabs__item) {
   min-width: 170px;
 }
-:deep(.el-tabs__item:hover),
-:deep(.el-tabs__item.is-active) {
+::v-deep(.el-tabs__item:hover),
+::v-deep(.el-tabs__item.is-active) {
   color: #d0011b;
 }
-:deep(.el-tabs__active-bar) {
+::v-deep(.el-tabs__active-bar) {
   background-color: #d0011b;
 }
 </style>

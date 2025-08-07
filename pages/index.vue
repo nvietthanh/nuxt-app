@@ -49,10 +49,10 @@ useSeoMeta({
 </script>
 
 <style scoped>
-:deep(.el-rate .el-rate__icon) {
+::v-deep(.el-rate .el-rate__icon) {
   font-size: 14px;
 }
-:deep(.product-sold) {
+::v-deep(.product-sold) {
   font-size: 10px;
 }
 </style>

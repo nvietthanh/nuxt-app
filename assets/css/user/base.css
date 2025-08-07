@@ -1,6 +1,12 @@
+@import "@/assets/css/user/__variable.css";
+
 body {
     background-color: #ededed;
     font-size: 14px;
+}
+
+header {
+    height: var(--header-height);
 }
 
 .header-main {
@@ -36,15 +42,14 @@ footer .footer-main {
     margin-bottom: 12px;
 }
 
-main .main {
+.main-container {
     width: 1200px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: var(--main-margin) auto;
 }
 
-main .main>.main-tab {
-    margin-top: 100px;
-    margin-bottom: 16px;
+.main-container.is-full-main {
+    height: calc(100vh - var(--header-height) - 2 * var(--main-margin));
 }
 
 .el-drawer__body {
@@ -64,10 +69,6 @@ main .main>.main-tab {
     margin-bottom: 0;
     padding-bottom: 12px;
     border-bottom: 1px solid #000;
-}
-
-input:focus {
-    border-color: #fff !important;
 }
 
 #cart-products {
@@ -200,7 +201,7 @@ input:focus {
 @media only screen and (max-width: 1024px) {
     .header-menu,
     .header-main,
-    .main,
+    .main-container,
     .footer-search,
     .footer-main {
         padding: 0 12px 0 8px;
@@ -211,7 +212,7 @@ input:focus {
         padding-top: 8px;
     }
 
-    .main,
+    .main-container,
     .footer-search,
     .footer-main {
         padding: 0 8px;
@@ -227,10 +228,6 @@ input:focus {
 }
 
 @media only screen and (max-width: 576px) {
-    main .main>.main-tab {
-        margin-top: 90px;
-    }
-
     #list-cart-product {
         width: calc(100vw - 25px);
     }

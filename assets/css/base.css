@@ -48,6 +48,15 @@ a:hover {
     color: blue;
 }
 
+input {
+    outline: none;
+    border: 1px solid #c8ced1;
+}
+
+input:focus-visible {
+    border-color: #6096fa;
+}
+
 /* ==================== Custom style element plus ==================== */
 .el-form-item:not(.is-error) {
     margin-bottom: 8px !important;

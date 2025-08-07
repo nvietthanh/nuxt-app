@@ -1,0 +1,17 @@
+#chat-channel {
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+}
+
+#chat-channel .chat-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#chat-channel .chat-container .chat-sidebar {
+    width: 30%;
+    padding: 12px;
+    border-right: 2px solid #ededed;
+}

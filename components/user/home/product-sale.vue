@@ -20,11 +20,11 @@
         </template>
       </div>
       <div class="my-[12px] flex justify-center">
-        <a href="route('flashSale')">
+        <NuxtLink :to="{ name: 'flash-sale' }">
           <div class="px-[24px] py-[12px] bg-[white] text-center rounded-[4px]">
             Xem tất cả sản phẩm
           </div>
-        </a>
+        </NuxtLink>
       </div>
     </div>
   </div>
