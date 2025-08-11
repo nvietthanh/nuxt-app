@@ -17,7 +17,7 @@
           <div v-for="item in 6" class="px-[18px] py-[12px] flex">
             <div class="flex items-center">
               <img
-                :src="'/images/devices/phone/dienthoai-1.webp'"
+                :src="'/images/devices/example.webp'"
                 alt=""
                 class="w-[50px] h-[50px]"
               />

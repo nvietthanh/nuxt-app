@@ -35,7 +35,7 @@ function handleCurrentChange(page: number) {
 }
 </script>
 <style scoped>
-:deep(.el-pagination.is-background .el-pager li.is-active) {
+::v-deep(.el-pagination.is-background .el-pager li.is-active) {
   background-color: #d0011b;
 }
 </style>

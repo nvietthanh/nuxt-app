@@ -78,7 +78,7 @@ const rules = reactive<FormRules<ForgotPasswordForm>>({
 const handleForgotPassword = async () => {};
 </script>
 <style scoped>
-:deep(.forgot-password-form) {
+::v-deep(.forgot-password-form) {
   border-radius: 5px;
   opacity: 1;
   padding: 2px;

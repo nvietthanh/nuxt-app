@@ -77,23 +77,23 @@ const handleChangeTab = () => {
 };
 </script>
 <style scoped>
-:deep(.el-tabs__item) {
+::v-deep(.el-tabs__item) {
   min-width: 110px;
   font-weight: 600;
   height: 50px;
   padding-right: 0 !important;
   padding-left: 0 !important;
 }
-:deep(#tab-prepare.el-tabs__item),
-:deep(#tab-shipping.el-tabs__item),
-:deep(#tab-deliverd.el-tabs__item) {
+::v-deep(#tab-prepare.el-tabs__item),
+::v-deep(#tab-shipping.el-tabs__item),
+::v-deep(#tab-deliverd.el-tabs__item) {
   min-width: 150px;
 }
-:deep(.el-tabs__item:hover),
-:deep(.el-tabs__item.is-active) {
+::v-deep(.el-tabs__item:hover),
+::v-deep(.el-tabs__item.is-active) {
   color: #d0011b;
 }
-:deep(.el-tabs__active-bar) {
+::v-deep(.el-tabs__active-bar) {
   background-color: #d0011b;
 }
 </style>

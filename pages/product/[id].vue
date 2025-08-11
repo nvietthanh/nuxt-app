@@ -52,7 +52,7 @@ const product = ref<ProductDetail>({
   maker: {
     id: 1,
     name: "Faruiline Official Store",
-    image_url: "/images/devices/phone/dienthoai-1.webp",
+    image_url: "/images/devices/example.webp",
     percent_rating: 99,
     total_product: 1200,
     joined_at: "2019/11/25",

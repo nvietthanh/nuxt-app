@@ -1,12 +1,14 @@
 <template>
-  <el-rate
-    v-model="internalRate"
-    :disabled="disabled"
-    :show-score="false"
-    :show-text="false"
-    :colors="colors"
-    @change="changeRate"
-  />
+  <div>
+    <el-rate
+      v-model="internalRate"
+      :disabled="disabled"
+      :show-score="false"
+      :show-text="false"
+      :colors="colors"
+      @change="changeRate"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -35,10 +37,10 @@ const changeRate = (val: Number) => {
 </script>
 
 <style scoped>
-.el-rate :deep(.el-rate__icon) {
+::v-deep(.el-rate .el-rate__icon) {
   margin-right: 0 !important;
 }
-:deep(.el-rate__text) {
+::v-deep(.el-rate__text) {
   margin-left: 8px;
   margin-bottom: -6px;
   font-size: 12px;

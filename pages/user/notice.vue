@@ -20,7 +20,7 @@
                 >
                   <div class="flex items-center">
                     <ImageLoading
-                      :src="'/images/devices/phone/dienthoai-1.webp'"
+                      :src="'/images/devices/example.webp'"
                       alt=""
                       class="w-[60px] aspect-square border-[1px]"
                     />
