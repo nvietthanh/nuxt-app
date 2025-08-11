@@ -6,7 +6,7 @@ const route = useRoute();
 /**
  * Handle back navigation based on current path
  */
-const handleBack = () => {
+const handleBack = (): string => {
   if (route.path.startsWith("/admin")) {
     return "/admin/dashboard";
   }

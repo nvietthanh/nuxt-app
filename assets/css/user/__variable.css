@@ -1,6 +1,10 @@
 :root {
     --header-height: 90px;
-    --main-margin: 8px;
+    --main-margin: 16px;
     --border-progress-sale-color: #bebebe;
     --base-color: #d0011b;
+
+    /* custom element plus */
+    --el-border-color: #c1c1c1 !important;
+    --el-border-color-hover: #999999 !important;
 }

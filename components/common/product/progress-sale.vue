@@ -27,12 +27,12 @@ const props = defineProps({
   color: { type: String, default: "#d0021c" },
 });
 
-const textProcess = computed(() => {
+const textProcess = computed((): string => {
   const remaining = props.total - props.current;
 
   return props.text.replace("{value}", remaining.toString());
 });
-const processPercent = computed(() => {
+const processPercent = computed((): number => {
   return (props.current / props.total) * 100;
 });
 </script>

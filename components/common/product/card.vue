@@ -60,7 +60,7 @@ const props = withDefaults(
   }
 );
 
-const calculateDiscountedPrice = computed(() => {
+const calculateDiscountedPrice = computed((): number => {
   const price = props.product.price;
   const percentSale = props.product.percent_sale;
 

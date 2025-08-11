@@ -132,24 +132,24 @@ const rules = reactive<FormRules<LoginForm>>({
     {
       required: true,
       message: validationMessages.required("email"),
-      trigger: ["blur"],
+      trigger: ["change"],
     },
     {
       type: "email",
       message: validationMessages.type.email("email"),
-      trigger: ["blur"],
+      trigger: ["change"],
     },
   ],
   password: [
     {
       required: true,
       message: validationMessages.required("password"),
-      trigger: ["blur"],
+      trigger: ["change"],
     },
     {
       min: 8,
       message: validationMessages.minLength("password", 8),
-      trigger: ["blur"],
+      trigger: ["change"],
     },
   ],
 });

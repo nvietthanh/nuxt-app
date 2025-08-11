@@ -26,7 +26,7 @@
             >
               <NuxtLink :to="{ name: 'product', params: { id: product.id } }">
                 <ImageLoading
-                  :src="product.images[0].thumbnal_url ?? ''"
+                  :src="product.images[0].url ?? ''"
                   :alt="product.name"
                   class="w-[50px] aspect-square border-[1px]"
                 />
@@ -81,7 +81,10 @@ withDefaults(defineProps<{ cartProducts?: ProductCart[] }>(), {
   cartProducts: () => [],
 });
 
-const calculateDiscountedPrice = (price: number, percentSale: number) => {
+const calculateDiscountedPrice = (
+  price: number,
+  percentSale: number
+): number => {
   return price - (price * percentSale) / 100;
 };
 </script>

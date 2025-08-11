@@ -54,12 +54,12 @@ const calculatePrice = (
   purchaseQuantity: number,
   price: number,
   percentSale: number
-) => {
+): number => {
   const calculateDiscount = calculateDiscountedPrice(price, percentSale);
 
   return calculateDiscount * purchaseQuantity;
 };
-const calculateDiscountedPrice = (price: number, percentSale: number) => {
+const calculateDiscountedPrice = (price: number, percentSale: number): number => {
   return price - (price * percentSale) / 100;
 };
 </script>

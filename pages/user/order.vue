@@ -31,8 +31,7 @@
 <script setup lang="ts">
 import SlidebarComponent from "@/components/user/profile/slidebar.vue";
 import OrderItem from "@/components/user/order/item.vue";
-import type { ProductOrder } from "~/types/users/order";
-import { startLoading, stopLoading } from "@/utils/loading-helper";
+import type { ProductOrder } from "@/types/users/order";
 
 definePageMeta({
   name: "order",
