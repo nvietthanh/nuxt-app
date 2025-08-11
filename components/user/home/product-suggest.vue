@@ -35,5 +35,5 @@
   </div>
 </template>
 <script setup lang="ts">
-import ProductCard from '~/components/common/product/card.vue';
+import ProductCard from '@/components/common/product/card.vue';
 </script>

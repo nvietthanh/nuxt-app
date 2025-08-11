@@ -41,7 +41,7 @@
         </div>
         <div class="flex items-end font-bold my-[12px] gap-x-[18px]">
           <div
-            v-if="product.status === productStatus.IN_STOCK"
+            v-if="product.status === PRODUCT_STATUS.IN_STOCK"
             class="flex items-end text-[14px]"
           >
             <div class="line-through">
@@ -52,13 +52,13 @@
             {{ formatPrice(product.price) }}
           </div>
           <div
-            v-if="product.status === productStatus.IN_STOCK"
+            v-if="product.status === PRODUCT_STATUS.IN_STOCK"
             class="bg-[#d0021c] text-[12px] py-[2px] px-[4px] text-white"
           >
             -{{ product.percent_sale }}% giảm
           </div>
         </div>
-        <template v-if="product.status === productStatus.IN_STOCK">
+        <template v-if="product.status === PRODUCT_STATUS.IN_STOCK">
           <div class="flex mt-[18px]">
             <div class="w-[120px]">Còn hàng</div>
             <div>
@@ -127,7 +127,7 @@ import { Star, StarFilled, Minus, Plus } from "@element-plus/icons-vue";
 import { useRoute } from "vue-router";
 import { useCartStore } from "@/stores/cart";
 import { formatPrice, formatCompactNumber } from "@/libs/formatter";
-import { productStatus } from "@/const/product-status";
+import { PRODUCT_STATUS } from "@/const/product-status";
 import type { ProductDetail } from "@/types/users/product-detail";
 
 const props = defineProps<{ product: ProductDetail }>();
@@ -146,10 +146,10 @@ const formData = ref<CartForm>({
   quantity: 1,
   product_id: productId,
 });
-const isDisableDecreaseCart = computed(() => {
+const isDisableDecreaseCart = computed((): boolean => {
   return formData.value.quantity <= 1;
 });
-const isDisableIncreaseCart = computed(() => {
+const isDisableIncreaseCart = computed((): boolean => {
   return formData.value.quantity >= props.product.stock_quantity;
 });
 

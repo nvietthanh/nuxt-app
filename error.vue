@@ -12,7 +12,7 @@ const props = defineProps<{
   };
 }>();
 
-const layoutName: LayoutKey = (() => {
+const layoutName: LayoutKey = ((): string => {
   if (props.error.statusCode === 404) return "404";
   if (props.error.statusCode === 403) return "403";
 

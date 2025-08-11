@@ -10,5 +10,5 @@
   </el-carousel>
 </template>
 <script setup lang="ts">
-import ImageLoading from '~/components/common/image-loading.vue';
+import ImageLoading from '@/components/common/image-loading.vue';
 </script>

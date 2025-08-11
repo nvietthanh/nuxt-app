@@ -1,3 +1,3 @@
-import type { productStatus } from "@/const/product-status";
+import type { PRODUCT_STATUS } from "@/const/product-status";
 
-export type ProductStatus = (typeof productStatus)[keyof typeof productStatus];
+export type ProductStatus = (typeof PRODUCT_STATUS)[keyof typeof PRODUCT_STATUS];

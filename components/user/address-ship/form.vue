@@ -105,7 +105,7 @@
 </template>
 <script setup lang="ts">
 import type { FormRules } from "element-plus";
-import type { Address } from "~/types/users/address";
+import type { Address } from "@/types/users/address";
 
 interface DataForm {
   id?: number;

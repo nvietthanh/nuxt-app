@@ -47,7 +47,7 @@
       <button
         v-if="
           tabSelected === 'delivered' &&
-          product.status === productStatus.IN_STOCK
+          product.status === PRODUCT_STATUS.IN_STOCK
         "
         class="sm:block hidden mb-[4px] mt-[8px] w-[120px] text-center h-[38px] border-[1px] border-[#000]"
       >
@@ -60,7 +60,7 @@
 import ImageLoading from "@/components/common/image-loading.vue";
 import type { ProductOrder } from "@/types/users/order";
 import { formatPrice } from "@/libs/formatter";
-import { productStatus } from "@/const/product-status";
+import { PRODUCT_STATUS } from "@/const/product-status";
 
 defineProps<{
   tabSelected: string;

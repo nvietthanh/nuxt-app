@@ -94,18 +94,17 @@
   </div>
 </template>
 <script setup lang="ts">
-import StarRate from "~/components/common/product/star-rate.vue";
-import ImageLoading from "~/components/common/image-loading.vue";
+import StarRate from "@/components/common/product/star-rate.vue";
+import ImageLoading from "@/components/common/image-loading.vue";
 import type { ProductDetail } from "@/types/users/product-detail";
-import type { PaginateFilter } from "~/types/paginate-filter";
-import type { Paginate } from "~/types/paginate";
+import type { PaginateFilter } from "@/types/paginate-filter";
+import type { Paginate } from "@/types/paginate";
 import PaginateComponent from "@/components/user/pagination/paginate.vue";
 import {
   useRoute,
   useRouter,
   type RouteLocationNormalizedLoaded,
 } from "vue-router";
-import { startLoading, stopLoading } from "@/utils/loading-helper";
 
 defineProps<{ product: ProductDetail }>();
 

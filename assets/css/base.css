@@ -9,7 +9,7 @@ body {
     line-height: 1.6;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 4px !important;
     height: 8px !important;
 }
@@ -25,7 +25,7 @@ body {
 
 ::-webkit-scrollbar-track {
     background: #fbfbfb;
-}
+} */
 
 input, optgroup, select, textarea {
     padding: 0 12px;
@@ -35,7 +35,7 @@ button:disabled {
     opacity: 0.5;
 }
 
-button:hover {
+button:not(:disabled):hover {
     opacity: 0.7;
 }
 

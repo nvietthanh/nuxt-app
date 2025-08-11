@@ -1,7 +1,7 @@
 @import "@/assets/css/user/__variable.css";
 
 body {
-    background-color: #ededed;
+    background-color: #dfdfdf;
     font-size: 14px;
 }
 
@@ -49,6 +49,7 @@ footer .footer-main {
 }
 
 .main-container.is-full-main {
+    box-shadow: 0 4px 8px #00000033;
     height: calc(100vh - var(--header-height) - 2 * var(--main-margin));
 }
 
@@ -199,6 +200,7 @@ footer .footer-main {
 }
 
 @media only screen and (max-width: 1024px) {
+
     .header-menu,
     .header-main,
     .main-container,
@@ -243,4 +245,20 @@ footer .footer-main {
 
 .progress-sale .el-progress-bar__outer {
     background-color: var(--border-progress-sale-color);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes loader {
+  100% {
+    transform: rotate(1turn)
+  }
 }

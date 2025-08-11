@@ -20,7 +20,7 @@ import { useLoadingStore } from "@/stores/loading";
 import LoadingIndicator from "@/components/common/loading-indicator.vue";
 
 useHead({
-  titleTemplate: (titleChunk) => {
+  titleTemplate: (titleChunk): string => {
     return titleChunk
       ? `${titleChunk} | Sàn thương mại điện tử`
       : "Sàn thương mại điện tử";

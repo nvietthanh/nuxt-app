@@ -79,7 +79,7 @@
 </template>
 <script setup lang="ts">
 import SlidebarComponent from "@/components/user/profile/slidebar.vue";
-import type { Address } from "~/types/users/address";
+import type { Address } from "@/types/users/address";
 import FormComponent from "@/components/user/address-ship/form.vue";
 
 definePageMeta({
