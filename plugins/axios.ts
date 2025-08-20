@@ -1,6 +1,5 @@
 // plugins/axios.ts
 import axios, { type AxiosRequestConfig } from "axios";
-import Cookies from "js-cookie";
 import { useErrorsStore } from "@/stores/errors";
 
 const baseApiURL = import.meta.env.VITE_BASE_API_URL.replace(/\/$/, "");
@@ -20,10 +19,12 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   instance.interceptors.request.use(
     (config) => {
-      const token = Cookies.get("token");
+      const token = getAccessToken();
+
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
+
       return config;
     },
     (error) => {

@@ -35,6 +35,7 @@ import type { ProductOrder } from "@/types/users/order";
 
 definePageMeta({
   name: "order",
+  middleware: "auth",
 });
 
 const tabSelected = ref<string>("all");

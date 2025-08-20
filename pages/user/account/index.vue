@@ -96,6 +96,7 @@ import { useRouter } from "vue-router";
 
 definePageMeta({
   name: "account",
+  middleware: "auth",
 });
 
 const router = useRouter();

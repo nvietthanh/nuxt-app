@@ -84,6 +84,7 @@ import FormComponent from "@/components/user/address-ship/form.vue";
 
 definePageMeta({
   name: "address-ship",
+  middleware: "auth",
 });
 
 const refAddressForm = ref();

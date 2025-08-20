@@ -30,6 +30,7 @@ import type { Paginate } from "@/types/paginate";
 
 definePageMeta({
   name: "chat.detail",
+  middleware: "auth",
 });
 
 interface ChannelFilter {

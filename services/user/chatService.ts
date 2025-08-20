@@ -271,7 +271,7 @@ export const getChannelList = async (params: {
           created_at: "2025/08/10 15:00:00",
         },
       ]);
-    }, 1500);
+    }, 500);
   });
 
   return channels;
@@ -287,7 +287,7 @@ export const getChannelDetail = async (channelId: number): Promise<Channel> => {
         name: "Thanh test",
         created_at: "2025-08-01T08:01:05Z",
       });
-    }, 1000);
+    }, 500);
   });
 
   return channel;
@@ -642,7 +642,7 @@ export const getMessagesByChannel = async (
           created_at: "2025-01-01T10:00:00Z",
         },
       ]);
-    }, 2000);
+    }, 1000);
   });
 
   return messages;

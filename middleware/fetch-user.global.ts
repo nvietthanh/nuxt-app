@@ -3,13 +3,16 @@ import { useAuthStore } from "@/stores/auth";
 export default defineNuxtRouteMiddleware(async () => {
   const authStore = useAuthStore();
   const { $axios } = useNuxtApp();
-  const token = useCookie("token");
 
-  if (token.value) {
+  const token = getAccessToken();
+
+  if (token) {
     $axios
-      .post("get-user")
+      .get("get-user")
       .then((res) => {
-        authStore.setUser(res.data);
+        const resData = res.data;
+
+        authStore.setUser(resData.data);
       })
       .catch((error) => {
         console.error("Error:", error);

@@ -21,6 +21,7 @@ import { getChannelList } from "@/services/user/chatService";
 
 definePageMeta({
   name: "chat",
+  middleware: "auth",
 });
 
 const channelStore = useChannelStore();
