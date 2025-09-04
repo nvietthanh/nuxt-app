@@ -30,6 +30,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import ImageLoading from '~/components/common/image-loading.vue';
-import ProductCard from '~/components/common/product/card.vue';
+import ImageLoading from '@/components/common/image-loading.vue';
+import ProductCard from '@/components/common/product/card.vue';
 </script>

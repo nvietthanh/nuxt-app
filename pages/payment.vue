@@ -114,7 +114,6 @@ const listCart = ref<ProductCart[]>([
     images: [
       {
         id: 1,
-        thumbnal_url: null,
         url: "test",
       },
     ],
@@ -159,7 +158,7 @@ const listAddress = ref<Address[]>([
   },
 ]);
 
-const totalPrice = computed(() =>
+const totalPrice = computed((): number =>
   listCart.value.reduce((sum, item) => {
     const discountedPrice = item.price - (item.price * item.percent_sale) / 100;
     return sum + discountedPrice * item.purchase_quantity;

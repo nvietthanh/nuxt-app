@@ -1,6 +1,4 @@
-// utils/loadingHelper.ts
 import { useLoadingStore } from '@/stores/loading'
-
 
 export function startLoading() {
   const loading = useLoadingStore()

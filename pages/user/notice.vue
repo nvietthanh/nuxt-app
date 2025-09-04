@@ -54,6 +54,7 @@ import SlidebarComponent from "@/components/user/profile/slidebar.vue";
 
 definePageMeta({
   name: "notice",
+  middleware: "auth",
 });
 </script>
 

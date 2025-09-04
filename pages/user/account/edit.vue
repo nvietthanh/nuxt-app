@@ -181,6 +181,7 @@ import { gender } from "@/const/gender";
 
 definePageMeta({
   name: "account.edit",
+  middleware: "auth",
 });
 
 const router = useRouter();

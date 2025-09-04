@@ -106,20 +106,17 @@ import type { FormRules } from "element-plus";
 import { validationMessages } from "@/utils/validation";
 import ImageLoading from "@/components/common/image-loading.vue";
 import { useRoute, useRouter } from "vue-router";
+import { loginUser } from "~/services/user/authService";
+import type { LoginForm } from "@/types/users/form/login-form";
 
 definePageMeta({
   name: "login",
+  middleware: "guest",
 });
-
-interface LoginForm {
-  email: string | null;
-  password: string | null;
-  remember?: boolean | null;
-}
 
 const router = useRouter();
 const route = useRoute();
-const { $axios, $errors } = useNuxtApp();
+const { $errors } = useNuxtApp();
 const { refCustomForm, loadingForm, doSubmit } = useForm();
 
 const formData = ref<LoginForm>({
@@ -132,36 +129,38 @@ const rules = reactive<FormRules<LoginForm>>({
     {
       required: true,
       message: validationMessages.required("email"),
-      trigger: ["blur"],
+      trigger: ["change"],
     },
     {
       type: "email",
       message: validationMessages.type.email("email"),
-      trigger: ["blur"],
+      trigger: ["change"],
     },
   ],
   password: [
     {
       required: true,
       message: validationMessages.required("password"),
-      trigger: ["blur"],
+      trigger: ["change"],
     },
     {
       min: 8,
       message: validationMessages.minLength("password", 8),
-      trigger: ["blur"],
+      trigger: ["change"],
     },
   ],
 });
 
 const handleLogin = async () => {
-  $errors.clear();
-
   const redirectUrl = (route.query.redirect as string) || "/";
 
-  router.push(redirectUrl);
+  $errors.clear();
 
-  // await $axios.post("/v1/login", formData.value);
+  const resData = await loginUser(formData.value);
+
+  setAccessToken(resData.data.access_token);
+
+  router.push(redirectUrl);
 };
 </script>
 <style scoped>

@@ -90,12 +90,13 @@
 </template>
 <script setup lang="ts">
 import SlidebarComponent from "@/components/user/profile/slidebar.vue";
-import ImageLoading from "~/components/common/image-loading.vue";
+import ImageLoading from "@/components/common/image-loading.vue";
 import type { Profile } from "@/types/users/profile";
 import { useRouter } from "vue-router";
 
 definePageMeta({
   name: "account",
+  middleware: "auth",
 });
 
 const router = useRouter();

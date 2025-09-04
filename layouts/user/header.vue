@@ -7,35 +7,38 @@
         <a href=""> Message thông báo có sản phẩm mới bạn tìm xem </a>
       </div>
       <div class="flex items-center button">
-        <div v-if="user" id="header-menu" class="relative cursor-pointer">
+        <div
+          v-if="currentUser"
+          id="header-menu"
+          class="relative cursor-pointer"
+        >
           <div class="flex items-center">
             <i class="bi bi-person text-[18px]"></i>
-            <span class="ml-[4px]">{{ user?.name }}</span>
+            <span class="ml-[4px]">{{ currentUser?.name }}</span>
           </div>
           <div id="list-menu" class="text-[#000] w-[215px]">
             <div class="px-[16px] py-[8px]">
-              <a href="route('cart')" class="py-[4px] flex items-center">
+              <NuxtLink
+                :to="{ name: 'cart' }"
+                class="py-[4px] flex items-center"
+              >
                 <i class="bi bi-cart text-[20px]"></i>
                 <span class="ml-[12px]">Giỏ hàng</span>
-              </a>
-              <a
-                href="route('buyer.profile')"
+              </NuxtLink>
+              <NuxtLink
+                :to="{ name: 'account' }"
                 class="py-[4px] flex items-center"
               >
                 <i class="bi bi-person text-[20px]"></i>
                 <span class="ml-[12px]">Thông tin cá nhân</span>
-              </a>
-              <a href="route('buyer.order')" class="py-[4px] flex items-center">
-                <i class="bi bi-bag text-[18px]"></i>
-                <span class="ml-[12px]">Quản lý đơn hàng</span>
-              </a>
-              <a
-                href="route('maker.purchase-order')"
+              </NuxtLink>
+              <NuxtLink
+                :to="{ name: 'order' }"
                 class="py-[4px] flex items-center"
               >
-                <i class="bi bi-shop text-[18px]"></i>
-                <span class="ml-[12px]">Quản lý trang bán hàng</span>
-              </a>
+                <i class="bi bi-bag text-[18px]"></i>
+                <span class="ml-[12px]">Quản lý đơn hàng</span>
+              </NuxtLink>
               <div @click="handleLogout()" class="py-[4px] flex items-center">
                 <i class="bi bi-box-arrow-left text-[18px]"></i>
                 <span class="ml-[12px]">Đăng xuất</span>
@@ -43,11 +46,13 @@
             </div>
           </div>
         </div>
-        <div class="flex items-center">
-          <NuxtLink :to="{ name: 'login' }"> Đăng nhập </NuxtLink>
-          <div class="w-[1px] h-[14px] bg-[#fff] mx-[8px]"></div>
-          <NuxtLink :to="{ name: 'register' }"> Đăng ký </NuxtLink>
-        </div>
+        <template v-else>
+          <div class="flex items-center">
+            <NuxtLink :to="{ name: 'login' }">Đăng nhập</NuxtLink>
+            <div class="w-[1px] h-[14px] bg-[#fff] mx-[8px]" />
+            <NuxtLink :to="{ name: 'register' }">Đăng ký</NuxtLink>
+          </div>
+        </template>
       </div>
     </div>
     <div class="h-[50px] md:h-[60px]">
@@ -97,7 +102,7 @@
   </div>
   <MobileMenu
     :is-show-menu="isShowMenu"
-    :user="user"
+    :user="currentUser"
     @logout="handleLogout"
     @close-menu="toogleMenu"
   />
@@ -112,8 +117,8 @@ import { useAuthStore } from "@/stores/auth";
 import { useCartStore } from "@/stores/cart";
 import type { User } from "@/types/user";
 import type { ProductCart } from "@/types/users/cart";
+import { logoutUser } from "@/services/user/authService";
 
-const { $axios } = useNuxtApp();
 const router = useRouter();
 const route = useRoute();
 const authStore = useAuthStore();
@@ -121,7 +126,7 @@ const cartStore = useCartStore();
 
 const isShowMenu = ref<boolean>(false);
 const keyword = ref<string | null>(null);
-const user = ref<User | null>(null);
+const currentUser = ref<User | null>(null);
 const cartProducts = computed((): ProductCart[] => {
   return cartStore.items;
 });
@@ -133,21 +138,30 @@ onMounted(() => {
     keyword.value = queryKeyword;
   }
 
-  user.value = authStore.user;
+  currentUser.value = authStore.user;
 });
+
+watch(
+    () => authStore.user,
+    () => {
+        currentUser.value = authStore.user
+    }
+)
 
 const toogleMenu = (val: boolean) => {
   isShowMenu.value = val;
 };
-const handleLogout = () => {
-  $axios
-    .post("/logout")
-    .then(() => {
-      router.push("/");
-    })
-    .catch((res) => {
-      console.error(res);
-    });
+const handleLogout = async () => {
+  await logoutUser();
+
+  clearAccessToken()
+  authStore.clearUser();
+
+  const isProtected = route.meta.middleware.includes("auth");
+
+  if (isProtected) {
+    router.push("/");
+  }
 };
 const handleSearch = () => {
   if (keyword.value != undefined && keyword.value != "") {
